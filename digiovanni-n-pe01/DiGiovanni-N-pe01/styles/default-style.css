@@ -1,0 +1,126 @@
+.pixelFont {
+	font-family: 'Pixelify Sans', sans-serif;
+}
+
+#output {
+	font-size: 200%;
+}
+
+#myButton {
+	height: 50pt;
+	width: 200px;
+	font-size: 15pt;
+	cursor: pointer;
+
+}
+
+/* Adding support for ancient android phones */
+@media (min-width: 240px) {
+	.container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+	}
+
+	html, body, .container {
+		height: 100%;
+		margin: 0;
+	}
+
+	#myButton {
+		height: 35pt;
+		width: 150px;
+		font-size: 10pt;
+		cursor: pointer;
+	
+	}
+
+	h1 {
+		font-size: 0.9rem;
+		background-color: #831787;
+		color: #F5F5F5;
+		padding: .8rem;
+		margin: 0;
+		text-align: center;
+	}
+			
+	#output {
+		text-align: center;
+		font-size: 1rem;
+	}
+}
+
+@media (min-width: 320px) {
+	.container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+	}
+
+	html, body, .container {
+		height: 100%;
+		margin: 0;
+	}
+
+	#myButton {
+		height: 50pt;
+		width: 200px;
+		font-size: 15pt;
+		cursor: pointer;
+	
+	}
+
+	h1 {
+		font-size: 1.2rem;
+		background-color: #174287;
+		color: #F5F5F5;
+		padding: .8rem;
+		margin: 0;
+		text-align: center;
+	}
+			
+	#output {
+		text-align: center;
+		font-size: 2rem;
+	}
+}
+
+@media (min-width: 768px) {
+	h1 {
+		font-size: 3rem;
+		background-color: #23D160;
+	}
+
+	#myButton {
+		width: 300px;
+		height: 75pt;
+		font-size: 1.5rem;
+	}
+
+	body {
+		color: darkgray;
+		font-size: 2rem;
+	}
+}
+
+@media (min-width:1024px) {
+	body {
+		font-size: 1rem;
+		text-align: left;
+	}
+
+	h1 {
+		background-color: #FF3860;
+	}
+
+	.container {
+		display: block;
+		margin: 1rem;
+	}
+
+	#output {
+	    text-align: left;
+	}
+}

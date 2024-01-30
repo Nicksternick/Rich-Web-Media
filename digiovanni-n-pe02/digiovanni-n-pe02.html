@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>PE_02</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap" rel="stylesheet">
+	<style>
+		*{
+			font-size:1.5em;
+			font-family: "Dosis", sans-serif;
+		}
+
+		@media only screen and (min-width: 1024px) {
+			body {
+				background-color: red;
+				padding: 100px;
+			}
+		}
+
+		#input-shout{
+			font-size: 14pt;
+		}
+
+		button {
+			width: 150px;
+			height: 50px;
+			font-size: 14pt;
+		}
+	</style>
+	<script>
+		window.onload = () => {
+			// Get references to the two buttons
+			const helloButton = document.querySelector("#btn-hello");
+			const byeButton = document.querySelector("#btn-goodbye");
+
+			// declare a new arrow function
+			const greet = (greeting) => {
+				// Get the first name and last name
+				let firstName = document.querySelector("#input-firstname").value;
+				let lastName = document.querySelector("#input-lastname").value;			
+				
+				// Set default names if needed
+				if (!firstName.trim()) firstName = "John";
+				if (!lastName.trim()) lastName = "Doe";
+
+				// Check to see if the shout toggle is checked,
+				// Uppercase all of letters in firstName and lastName
+				if (document.querySelector("#shout-toggle").checked)
+				{
+					firstName = firstName.toUpperCase();
+					lastName = lastName.toUpperCase();
+				}
+
+				// change the output html
+				document.querySelector("#output").innerHTML = `${greeting} ${firstName} ${lastName}!`;
+			}
+
+			// Add arrow function to hello button when it's clicked
+			helloButton.addEventListener("click", () => {greet("Hello")});
+
+			// Add arrow function to goodbye button when it's clicked
+			byeButton.addEventListener("click", () => {greet("Goodbye")});
+
+			// Change the style of output
+			document.querySelector("#output").style.color = "red";
+			document.querySelector("#output").style.backgroundColor = "yellow";			
+		};
+	</script>
+</head>
+<body>
+	<button id="btn-hello">Say Hello</button>
+	<button id="btn-goodbye">Say Goodbye</button>
+	<span id="input-shout">
+		<input type="checkbox" name="Shoutify!" id="shout-toggle">
+		<label for="shout-toggle">Shoutify!</label>
+	</span>
+	<hr>
+	<input id="input-firstname" placeholder="Type in your name">
+	<input id="input-lastname" placeholder="Type in your last name">
+	<p id="output">???</p>
+</body>
+</html>
