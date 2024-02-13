@@ -48,6 +48,7 @@
             ctx = canvas.getContext("2d");
 
             drawRectangle(ctx, 20, 20, 600, 440, "red");
+            drawLine(ctx,20,20,620,440,20,"Yellow");
 
             setupUI();
 
@@ -62,19 +63,24 @@
             if (createLines) drawRandomLine(ctx);
         }
 
+
+        // Random draw functions
+        // Draws a random Rectangle
         function drawRandomRect(ctx) {
             drawRectangle(ctx,getRandomInt(0, 640),getRandomInt(0, 480),getRandomInt(10, 90),getRandomInt(10, 90),getRandomColor(),getRandomInt(2, 12),getRandomColor());
         }
 
+        // Draws a random Circle
         function drawRandomArc(ctx)
         {
             drawArc(ctx,getRandomInt(0, 640),getRandomInt(0, 480),getRandomInt(10, 60),
             getRandomColor(),getRandomInt(1,10),getRandomColor());
         }
 
+        // Draws a random line
         function drawRandomLine(ctx)
         {
-            drawLine(ctx,getRandomInt(0, 480),getRandomInt(0, 640),
+            drawLine(ctx,getRandomInt(0, 640),getRandomInt(0, 480),
             getRandomInt(0, 480),getRandomInt(0, 640),getRandomInt(5, 20),getRandomColor());
         }
 
@@ -167,9 +173,14 @@
                 update();
             };
 
+            // CLEAR BUTTON
             document.querySelector("#btnClear").onclick = function () {
+                // CLEAR THE SCREEN
                 ctx.clearRect(0,0,640,480);
+                // REDRAW THE RED RECTANGLE BACKGROUND
                 drawRectangle(ctx, 20, 20, 600, 440, "red");
+                // REFRAW THE YELLOW LINE
+                drawLine(ctx,20,20,620,440,20,"Yellow");
             };
 
             canvas.onclick = canvasClicked;
