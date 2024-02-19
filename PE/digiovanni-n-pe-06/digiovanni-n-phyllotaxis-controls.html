@@ -5,10 +5,25 @@
     <meta charset="utf-8" />
     <title>Sine Start</title>
     <style>
-        body {
+        /* #canvas-container {
             display: flex;
             justify-content: center;
         }
+
+        #input-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #divergence-container {
+            display: flex;
+            margin-left: 10px;
+        }
+
+        #divergence-text {
+            margin: auto;
+        } */
 
         canvas {
             border: 1px solid black;
@@ -16,10 +31,13 @@
     </style>
     <script>
         "use strict";
-        const canvasWidth = 400, canvasHeight = 300;
+        // ===== | Script Variables | =====
+        const canvasWidth = 600, canvasHeight = 600;
         let ctx;
         let n = 0;
-        const divergence = 137.5;
+        let divergenceValue = 0.5;
+        let fps = 60;
+        const divergence = 137;
         const c = 4;
 
         window.onload = init;
@@ -29,17 +47,45 @@
             canvas.width = canvasWidth;
             canvas.height = canvasHeight;
             ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+            setupUI();
+
             loop();
         }
 
+        function setupUI()
+        {
+            document.querySelector("#divergence-slider").addEventListener('input', () => {
+                let value = document.querySelector("#divergence-slider").value;
+
+                divergenceValue = value / 10;
+
+                value = value / 10;
+
+                document.querySelector("#divergence-text").innerHTML = `Level of Divergence: ${value}`;
+            });
+
+            document.querySelector("#btn-restart").addEventListener('click', () => {
+                resetCanvas(ctx);
+            });
+        }
+
+        function resetCanvas(ctx)
+        {
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            ctx.fillRect(0, 0, canvasWidth, canvasHeight, "black");
+
+            n = 0;
+        }
+
         function loop() {
-            setTimeout(loop, 1000 / 30);
+            setTimeout(loop, 1000 / fps);
 
             // each frame draw a new dot
             // `a` is the angle
             // `r` is the radius from the center (e.g. "Pole") of the flower
             // `c` is the "padding/spacing" between the dots
-            let a = n * dtr(divergence);
+            let a = n * dtr(divergence + divergenceValue);
             let r = c * Math.sqrt(n);
             //console.log(a, r);
 
@@ -48,12 +94,12 @@
             let y = r * Math.sin(a) + canvasHeight / 2;
             //console.log(x, y);
 
-            let color = `hsl(${n/5 % 361},100%,50%)`;
+            let color = `hsl(${n/5 % 361},100%,50%)`
+
             drawCircle(ctx, x, y, 2, color);
 
             n++;
         }
-
 
         // helpers
         function dtr(degrees) {
@@ -74,8 +120,33 @@
 </head>
 
 <body>
-    <canvas id="canvas"></canvas>
+    <header>
+        <h1>Psychedelic Flower Generator</h1>
+    </header>
 
+    <main>
+        <div id="canvas-container">
+            <canvas id="canvas"></canvas>
+        </div>
+        <div id="input-container">
+            <div id="divergence-container">
+                <button id="btn-restart">Restart App</button>
+                <input type="range" min="0" max="10" id="divergence-slider">
+                <label id="divergence-text" for="divergence-slider">Level of Divergence: 0.5</label>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <h2>Documentations</h2>
+        <ul>
+            <li>Increased sreen size, and made it a square.</li>
+            <li>Added the restart button, that resets the program<br>
+                to a state similar to when the webpage is loaded</li>
+            <li>Added a slider to change the divergence decminal</li>
+        </ul>
+    </footer>
+    
 </body>
 
 </html>

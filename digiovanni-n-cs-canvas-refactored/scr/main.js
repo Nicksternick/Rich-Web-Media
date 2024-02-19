@@ -2,6 +2,7 @@
 import { getRandomInt, getRandomColor } from "./utils.js";
 import * as shapes from "./canvas-utils.js";
 
+// Declare top variables
 let ctx;
 let paused = false;
 let createRectangles = true;
@@ -9,9 +10,9 @@ let createArcs = true;
 let createLines = true;
 let canvas;
 
+// init(): Initilizes the page on startup
 const init = () => {
     console.log("page loaded!");
-    // #2 Now that the page has loaded, start drawing!
 
     // A - `canvas` variable points at <canvas> tag
     canvas = document.querySelector("canvas");
@@ -19,21 +20,31 @@ const init = () => {
     // B - the `ctx` variable points at a "2D drawing context"
     ctx = canvas.getContext("2d");
 
+    // Draw the background
     drawBackground();
 
+    // Set up the html UI
     setupUI();
 
+    // Begin the update look
     update();
 }
 
+// drawBackground(): draws the shapes that make up the background
 const drawBackground = () => {
     shapes.drawRectangle(ctx, 20, 20, 600, 440, "red");
     shapes.drawLine(ctx, 20, 20, 620, 440, 20, "Yellow");
 }
 
+// Update(): The main loop that updates every frame
 const update = () => {
+    // Stop the loop if paused
     if (paused) return;
+
+    // Request update to be played next frame
     requestAnimationFrame(update);
+
+    // Draw random shapes if they are active
     if (createRectangles) shapes.drawRandomRect(ctx, 0, 640, 0, 480);
     if (createArcs) shapes.drawRandomArc(ctx, 0, 640, 0, 480);
     if (createLines) shapes.drawRandomLine(ctx, 0, 640, 0, 480);
