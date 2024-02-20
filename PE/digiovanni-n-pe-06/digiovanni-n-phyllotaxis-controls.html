@@ -5,26 +5,6 @@
     <meta charset="utf-8" />
     <title>Sine Start</title>
     <style>
-        /* #canvas-container {
-            display: flex;
-            justify-content: center;
-        }
-
-        #input-container {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-        }
-
-        #divergence-container {
-            display: flex;
-            margin-left: 10px;
-        }
-
-        #divergence-text {
-            margin: auto;
-        } */
-
         canvas {
             border: 1px solid black;
         }
@@ -38,7 +18,11 @@
         let divergenceValue = 0.5;
         let fps = 60;
         const divergence = 137;
-        const c = 4;
+        let c = 4;
+
+        let petalSize = 2;
+
+        let paused = false;
 
         window.onload = init;
 
@@ -55,6 +39,7 @@
 
         function setupUI()
         {
+            // Divergence Slider
             document.querySelector("#divergence-slider").addEventListener('input', () => {
                 let value = document.querySelector("#divergence-slider").value;
 
@@ -65,8 +50,48 @@
                 document.querySelector("#divergence-text").innerHTML = `Level of Divergence: ${value}`;
             });
 
+            // fps (Flower Bloom Speed Slider)
+            document.querySelector("#fps-slider").addEventListener('input', () => {
+                let value = document.querySelector("#fps-slider").value;
+
+                fps = value;
+
+                document.querySelector("#fps-text").innerHTML = `Flower Bloom Speed: ${value}`;
+            });
+
+            // Petal Size Slider
+            document.querySelector("#petal-size-slider").addEventListener('input', () => {
+                let value = document.querySelector("#petal-size-slider").value;
+
+                petalSize = value;
+
+                document.querySelector("#petal-size-text").innerHTML = `Petal Size: ${value}`;
+            });
+
+            // Petal Spacing
+            document.querySelector("#padding-slider").addEventListener('input', () => {
+                let value = document.querySelector("#padding-slider").value;
+
+                c = value;
+
+                document.querySelector("#padding-text").innerHTML = `Petal Spacing: ${value}`;
+            });
+
+            // Restart Button
             document.querySelector("#btn-restart").addEventListener('click', () => {
                 resetCanvas(ctx);
+            });
+
+            // Pause Button
+            document.querySelector("#btn-pause").addEventListener('click', () => {
+                paused = true;
+            });
+
+            // Start Button
+            document.querySelector("#btn-start").addEventListener('click', () => {
+                if (!paused) return;
+                paused = false;
+                loop();
             });
         }
 
@@ -79,6 +104,7 @@
         }
 
         function loop() {
+            if (paused) return;
             setTimeout(loop, 1000 / fps);
 
             // each frame draw a new dot
@@ -96,7 +122,7 @@
 
             let color = `hsl(${n/5 % 361},100%,50%)`
 
-            drawCircle(ctx, x, y, 2, color);
+            drawCircle(ctx, x, y, petalSize, color);
 
             n++;
         }
@@ -129,11 +155,27 @@
             <canvas id="canvas"></canvas>
         </div>
         <div id="input-container">
-            <div id="divergence-container">
+            <section id="btn-container">
                 <button id="btn-restart">Restart App</button>
+                <button id="btn-pause">Pause App</button>
+                <button id="btn-start">Start App</button>
+            </section>
+            <section id="divergence-container">
                 <input type="range" min="0" max="10" id="divergence-slider">
                 <label id="divergence-text" for="divergence-slider">Level of Divergence: 0.5</label>
-            </div>
+            </section>
+            <section id="petal-size-container">
+                <input type="range" min="2" max="20" value="2" id="petal-size-slider">
+                <label id="petal-size-text" for="petal-size-slider">Petal Size: 2</label>
+            </section>
+            <section id="padding-container">
+                <input type="range" min="4" max="20" value="4" id="padding-slider">
+                <label id="padding-text" for="padding-slider">Petal Spacing: 4</label>
+            </section>
+            <section id="fps-container">
+                <input type="range" min="60" max="120" value="60" id="fps-slider">
+                <label id="fps-text" for="fps-slider">Flower Bloom Speed: 60</label>
+            </section>
         </div>
     </main>
 
