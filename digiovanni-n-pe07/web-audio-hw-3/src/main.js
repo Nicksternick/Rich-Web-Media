@@ -15,7 +15,9 @@ const drawParams = {
     showGradient : true,
     showBars : true,
     showCircle : true,
-    showNoise : true
+    showNoise : false,
+    showInvert : false,
+    showEmboss : false
 }
 
 // 1 - here we are faking an enumeration
@@ -105,6 +107,9 @@ function setupUI(canvasElement) {
         const gradientToggle = document.querySelector("#gradientCB");
         const barToggle = document.querySelector("#barsCB");
         const circleToggle = document.querySelector("#circlesCB");
+        const noiseToggle = document.querySelector("#noiseCB");
+        const invertToggle = document.querySelector("#invertCB");
+        const embossToggle = document.querySelector("#embossCB");
         
         gradientToggle.onclick = () => {
             drawParams.showGradient = gradientToggle.checked;
@@ -118,11 +123,21 @@ function setupUI(canvasElement) {
             drawParams.showCircle = circleToggle.checked;
         };
 
+        noiseToggle.onclick = () => {
+            drawParams.showNoise = noiseToggle.checked;
+        };
+        
+        invertToggle.onclick = () => {
+            drawParams.showInvert = invertToggle.checked;
+        };
+
+        embossToggle.onclick = () => {
+            drawParams.showEmboss = embossToggle.checked;
+        };
+
         gradientToggle.checked = true;
         barToggle.checked = true;
         circleToggle.checked = true;
-
-
 } // end setupUI
 
 function loop() {
