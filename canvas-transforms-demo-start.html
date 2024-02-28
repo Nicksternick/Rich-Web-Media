@@ -107,6 +107,21 @@
             ctx.restore();
         }
 
+        function drawTriangle1(ctx, x, y, p1, p2, p3, rotation, strokeStyle, fillStyle, lineWidth) {
+            ctx.save();
+            ctx.strokeStyle = strokeStyle;
+            ctx.fillStyle = fillStyle;
+            ctx.lineWidth = lineWidth;
+            ctx.translate(x, y);
+            ctx.rotate(rotation);
+            ctx.beginPath();
+            ctx.moveTo(0, -50);
+            ctx.lineTo(50, 50);
+            ctx.lineTo(-50, 50);
+            ctx.closePath();
+            ctx.stroke();
+            ctx.restore();
+        }
 
         function drawSquare1(ctx, x, y, width, height, fillStyle) {
             ctx.save();
