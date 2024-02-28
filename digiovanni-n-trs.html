@@ -21,6 +21,9 @@
         let ctx = document.querySelector('canvas').getContext('2d');
         let rotation = 0;
 
+        let scaleValue = 0;
+        let increase = true
+
         loop();
 
         function loop() {
@@ -32,24 +35,56 @@
 
             rotation += 0.05;
 
+
+            drawSquare2(ctx, 250, 300, 50, 50, rotation, "green", 1 + scaleValue);
+
+            if (increase)
+            {
+                scaleValue += 0.1;
+            }
+            else
+            {
+                scaleValue -= 0.1;
+            }
+
+            if (scaleValue >= 5)
+            {
+                increase = false;
+            }
+            else if (scaleValue <= 0)
+            {
+                increase = true;
+            }
+
             // draw a "better" triangle - why is this better? You'll see!
-            ctx.save();
-            ctx.strokeStyle = "red";
-            ctx.fillStyle = "red";
-            ctx.lineWidth = "5";
-            ctx.translate(100, 100);
-            ctx.rotate(rotation);
-            ctx.beginPath();
-            ctx.moveTo(0, -50);
-            ctx.lineTo(50, 50);
-            ctx.lineTo(-50, 50);
-            ctx.closePath();
-            ctx.stroke();
-            ctx.restore();
+            // ctx.save();
+            // ctx.strokeStyle = "red";
+            // ctx.fillStyle = "red";
+            // ctx.lineWidth = "5";
+            // ctx.translate(100, 100);
+            // ctx.rotate(rotation);
+            // ctx.beginPath();
+            // ctx.moveTo(0, -50);
+            // ctx.lineTo(50, 50);
+            // ctx.lineTo(-50, 50);
+            // ctx.closePath();
+            // ctx.stroke();
+            // ctx.restore();
+
+            drawTriangle1(ctx, 100, 100, 100, 100, rotation, "red", "red", 5);
+
+            drawTriangle1(ctx, 300, 350, 100, 50, rotation, "blue", "red", 5);
+
+            
+
+            
+
+            // ==============================================================
 
             drawSquare2(ctx, 200, 100, 100, 100, rotation, "purple", 0.75);
             drawSquare2(ctx, 350, 100, 100, 100, rotation, "purple", 1.0);
             drawSquare2(ctx, 500, 100, 100, 100, rotation, "purple", 1.25);
+            
 
             // do some transformations?
             ctx.save();
@@ -107,7 +142,7 @@
             ctx.restore();
         }
 
-        function drawTriangle1(ctx, x, y, p1, p2, p3, rotation, strokeStyle, fillStyle, lineWidth) {
+        function drawTriangle1(ctx, x, y, base, height, rotation, strokeStyle, fillStyle, lineWidth) {
             ctx.save();
             ctx.strokeStyle = strokeStyle;
             ctx.fillStyle = fillStyle;
@@ -115,9 +150,9 @@
             ctx.translate(x, y);
             ctx.rotate(rotation);
             ctx.beginPath();
-            ctx.moveTo(0, -50);
-            ctx.lineTo(50, 50);
-            ctx.lineTo(-50, 50);
+            ctx.moveTo(0, -height / 2);
+            ctx.lineTo(base / 2, height / 2);
+            ctx.lineTo(-base / 2, height / 2);
             ctx.closePath();
             ctx.stroke();
             ctx.restore();
