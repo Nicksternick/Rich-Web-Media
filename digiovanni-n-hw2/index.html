@@ -25,76 +25,81 @@
     </section>
 
     <section id="section-controls">
-        <button>Play ></button>
-        <button>Pause ||</button>
-        <span>
-            Volume: <input type="range" id="volumeSlider" min="0" max="2" value="1" step="0.01">
-            <span id="volumeLabel">???</span>
-        </span>
+        <div>
+            <button>Play ></button>
+            <button>Pause ||</button>
+            <span>
+                00:00<input type="range" id="playSlider" min="0" max="300" value="0" step="1">
+            </span>
+        </div>
+        <div>
+            <span>
+                Volume: <input type="range" id="volumeSlider" min="0" max="2" value="1" step="0.01">
+                <span id="volumeLabel">???</span>
+            </span>
+        </div>
     </section>
 
     <section id="section-settings">
+        <!-- Music Selection Setting -->
         <div>
-            <!-- Music Selection Setting -->
+            <h2>Songs</h2>
+            <!-- Pre Installed Songs -->
             <div>
-                <h2>Songs</h2>
-                <!-- Pre Installed Songs -->
-                <div>
-                    <label for="">Select a Song:</label>
-                    <select name="" id="">
-                        <option value="">Test 1</option>
-                        <option value="">Test 2</option>
-                        <option value="">Test 3</option>
-                    </select>
-                </div>
-
-                <!-- Allow user -->
-                <div>
-                    <label for="">Upload a Song:</label>
-                    <input type="file">
-                </div>
-                <div>
-                    <button>Play Song From List</button>
-                    <button>Play Song From File</button>
-                </div>
+                <label for="">Select a Song:</label>
+                <select name="" id="">
+                    <option value="">Test 1</option>
+                    <option value="">Test 2</option>
+                    <option value="">Test 3</option>
+                </select>
             </div>
 
-            <!-- Visualizer Settings -->
+            <!-- Allow user -->
             <div>
-                <h2>Visualization Options</h2>
-                <div>
-                    <span>
-                        <input type="checkbox">
-                        <label>Test</label>
-                    </span>
-                    <span>
-                        <input type="checkbox">
-                        <label>Test</label>
-                    </span>
-                    <span>
-                        <input type="checkbox">
-                        <label>Test</label>
-                    </span>
-                </div>
+                <label for="">Upload a Song:</label>
+                <input type="file">
             </div>
-
-            <!-- Effect Settings -->
             <div>
-                <h2>Effect Options</h2>
-                <div>
-                    <span>
-                        <input type="checkbox">
-                        <label>Test</label>
-                    </span>
-                    <span>
-                        <input type="checkbox">
-                        <label>Test</label>
-                    </span>
-                    <span>
-                        <input type="checkbox">
-                        <label>Test</label>
-                    </span>
-                </div>
+                <button>Play Song From List</button>
+                <button>Play Song From File</button>
+            </div>
+        </div>
+
+        <!-- Visualizer Settings -->
+        <div>
+            <h2>Visualization Options</h2>
+            <div>
+                <span>
+                    <input type="checkbox">
+                    <label>Test</label>
+                </span>
+                <span>
+                    <input type="checkbox">
+                    <label>Test</label>
+                </span>
+                <span>
+                    <input type="checkbox">
+                    <label>Test</label>
+                </span>
+            </div>
+        </div>
+
+        <!-- Effect Settings -->
+        <div>
+            <h2>Effect Options</h2>
+            <div>
+                <span>
+                    <input type="checkbox">
+                    <label>Test</label>
+                </span>
+                <span>
+                    <input type="checkbox">
+                    <label>Test</label>
+                </span>
+                <span>
+                    <input type="checkbox">
+                    <label>Test</label>
+                </span>
             </div>
         </div>
     </section>
