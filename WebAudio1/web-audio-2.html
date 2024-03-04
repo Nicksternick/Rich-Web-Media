@@ -39,7 +39,7 @@
 	<audio controls src="sounds/obama-oilspill.mp3"></audio>
 
 	<script>
-		const NUM_SAMPLES = 32;
+		const NUM_SAMPLES = 64;
 		// 1 - get reference to <audio> element on page
 		let audioElement = document.querySelector('audio');
 
@@ -92,8 +92,6 @@
 			// 9 - this schedules a call to the loop() method in 1/60 second
 			requestAnimationFrame(loop);
 
-
-
 			// 10 - populate the array with the frequency data
 			// notice these arrays are passed *by reference*
 			analyserNode.getByteFrequencyData(data);
@@ -103,16 +101,18 @@
 			/* YOU WRITE THIS! */
 			ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-			ctx.save();
-
 			ctx.fillStyle = "red";
+			ctx.save();
+			ctx.translate(320,MIDDLE_Y - 170);
 			for (let b of data)
 			{
 				let percent = b / 255;
+				if (percent < .02) percent = .02;
 				ctx.translate(BAR_WIDTH,0);
+				ctx.rotate(Math.PI * 2 / 32);
 				ctx.save();
-				ctx.translate(0,MIDDLE_Y);
 				ctx.scale(1,-1);
+				ctx.fillStyle = `rgb(${b}, ${b-128}, ${255-b})`;
 				ctx.fillRect(0, 0, BAR_WIDTH, percent * MAX_BAR_HEIGHT);
 				ctx.restore();
 				ctx.translate(PADDING,0);
