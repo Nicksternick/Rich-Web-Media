@@ -69,7 +69,7 @@ const draw = (params = {}) => {
 
     // ===== | ===== | ===== | =====
 
-    effectStreamers();
+    //effectStreamers();
 
     // 3 - draw gradient
     if (params.showGradient) {

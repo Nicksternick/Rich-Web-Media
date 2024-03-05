@@ -15,17 +15,20 @@ export class CircleVisualizer {
         this.pointList = [];
 
         for (let i = 0; i <= audioData.length; i++) {
-            if (audioData[i] == 0) { break; }
+            
             this.pointList.push(25 + audioData[i]);
         }
     }
 
     draw(ctx) {
+        // get the middle of the school
         let midX = this.canvasWidth / 2;
         let midY = this.canvasHeight / 2;
 
+        // save the current context
         ctx.save();
 
+        // apply to the styles as dictated by the class
         ctx.lineWidth = this.lineWidth;
         ctx.fillStyle = this.color;
         ctx.strokeStyle = this.lineColor;
@@ -33,16 +36,17 @@ export class CircleVisualizer {
         // begin drawing
         ctx.beginPath();
 
-        ctx.lineTo((Math.cos(0) * this.pointList[0] / 2) + midX, (Math.sin(0) * this.pointList[0] / 2) + midY);
-
         // setup the rect postion and size
-        for (let i = 1; i <= this.pointList.length; i++) {
+        for (let i = 0; i <= this.pointList.length; i++) {
+            // Calculate point x and y on the circle
             let x = Math.cos(this.circleDivisions * i) * this.pointList[i];
             let y = Math.sin(this.circleDivisions * i) * this.pointList[i];
-            ctx.lineTo((x / 2) + midX,
-                (y / 2) + midY);
+
+            // draw a line to it
+            ctx.lineTo((x / 2) + midX, (y / 2) + midY);
         }
 
+        // draw a final line to connect the start and end of the circle
         ctx.lineTo((Math.cos(0) * this.pointList[0] / 2) + midX, (Math.sin(0) * this.pointList[0] / 2) + midY);
 
         // color the rect
@@ -64,29 +68,40 @@ export class LineVisualizer {
     }
 
     update(audioData) {
+        // Create a number of divisions along the width of the canvas
         let width = this.canvasWidth / (audioData.length);
 
+        // clear the point list
         this.pointList = [];
 
-        for (let i = 0; i < audioData.length; i++) {
+        for (let i = 0; i <=audioData.length; i++) {
+
+            // calculate the x & y of the given point
             let finalX = i * width;
             let finalY = this.height + 256 - audioData[i];
+            
+            // clamp Y to Canvas Height is it goes over
+            if (finalY >= this.canvasHeight) {
+                finalY = this.canvasHeight;
+            }
+            
+            // Put X & Y into an array
             let xy = [finalX, finalY];
 
-            if (i == audioData.length - 1) {
+            if (i == audioData.length - 1)
+            {
                 xy[0] = this.canvasWidth;
             }
 
+            // push the point to the array
             this.pointList.push(xy);
         }
-
-        // this.pointList[audioData.length] = [this.canvasWidth, this.canvasHeight];
-        // this.pointList[audioData.length + 1] = [0, this.canvasHeight];
     }
 
     draw(ctx) {
         ctx.save();
 
+        // set up the colors
         ctx.lineWidth = this.lineWidth;
         ctx.fillStyle = this.color;
         ctx.strokeStyle = this.lineColor;

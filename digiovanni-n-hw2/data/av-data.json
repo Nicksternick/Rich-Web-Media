@@ -1,0 +1,24 @@
+{
+    "name": "Audio Visualizer",
+    "songs": [
+        {
+            "name": "New Adventure Theme",
+            "link": "media/New Adventure Theme.mp3"
+        },
+        {
+            "name": "Peanuts Theme",
+            "link": "media/Peanuts Theme.mp3"
+        },
+        {
+            "name": "The Picard Song",
+            "link": "media/The Picard Song.mp3"
+        }
+    ],
+    "visualizers": [
+        {
+            "color": "white",
+            "lineColor": "white",
+            "lineWidth": 1
+        }
+    ]
+}
