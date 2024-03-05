@@ -6,9 +6,12 @@ import * as visualizer from './visualizerUtils.js';
 
 let ctx, canvasWidth, canvasHeight, gradient, analyserNode, audioData;
 
+let frequencyData;
+let timeData;
+
 let streamers = [];
 let lineVisualizer;
-let CircleVisualizer;
+let circleVisualizer;
 // ===== | Methods | =====
 
 const setupCanvas = (canvasElement, analyserNodeRef) => {
@@ -17,7 +20,9 @@ const setupCanvas = (canvasElement, analyserNodeRef) => {
     canvasWidth = canvasElement.width;
     canvasHeight = canvasElement.height;
     // create a gradient that runs top to bottom
-    gradient = utils.getLinearGradient(ctx, 0, 0, 0, canvasHeight, [{ percent: 0, color: "blue" }, { percent: .25, color: "green" }, { percent: .5, color: "yellow" }, { percent: .75, color: "red" }, { percent: 1, color: "magenta" }]);
+    gradient = utils.getLinearGradient(ctx, 0, 0, 0, canvasHeight, [{ percent: 0, color: "blue" }, 
+    { percent: .25, color: "green" }, { percent: .5, color: "yellow" }, 
+    { percent: .75, color: "red" }, { percent: 1, color: "magenta" }]);
     // keep a reference to the analyser node
     analyserNode = analyserNodeRef;
     // this is the array where the analyser data will be stored
@@ -28,8 +33,10 @@ const setupCanvas = (canvasElement, analyserNodeRef) => {
 }
 
 const setupVisualizers = () => {
-    lineVisualizer =  new visualizer.LineVisualizer(canvasWidth, canvasHeight, `rgba(255,255,255,0)`, "red", 1);
-    CircleVisualizer = new visualizer.CircleVisualizer(canvasWidth, canvasHeight, `rgba(255,255,255,0)`, "red", 1);
+    lineVisualizer =  new visualizer.LineVisualizer(canvasWidth, canvasHeight, 
+        `rgba(255,255,255,0)`, "red", 1);
+    circleVisualizer = new visualizer.CircleVisualizer(canvasWidth, canvasHeight, 
+        `rgba(255,255,255,0)`, "red", 1);
 }
 
 const setupEffects = () => {
@@ -83,8 +90,8 @@ const draw = (params = {}) => {
         lineVisualizer.update(audioData);
         lineVisualizer.draw(ctx);
         
-        CircleVisualizer.update(audioData);
-        CircleVisualizer.draw(ctx);
+        circleVisualizer.update(audioData);
+        circleVisualizer.draw(ctx);
     }
 
     // 5 - draw circles
@@ -188,4 +195,4 @@ const effectStreamers = () => {
 }
 //#endregion
 
-export { setupCanvas, draw };
+export { setupCanvas, draw, circleVisualizer, lineVisualizer};

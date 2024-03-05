@@ -6,18 +6,32 @@ export class CircleVisualizer {
         Object.assign(this, { canvasWidth, canvasHeight, color, lineColor, lineWidth });
         this.pointList = [];
         this.circleDivisions = 0;
+        this.minData = 0;
+        this.maxData = 0;
         Object.seal(this);
     }
 
-    update(audioData) {
-        this.circleDivisions = (Math.PI * 2) / (audioData.length);
+    setMinData(value) {
+        this.minData = value;
+    }
 
+    setMaxData(value) {
+        this.maxData = 256 - value;
+    }
+
+    setLineWidth(value) {
+        this.lineWidth = value;
+    }
+
+    update(audioData) {
         this.pointList = [];
 
-        for (let i = 0; i <= audioData.length; i++) {
-            
+        for (let i = this.minData; i <= audioData.length - this.maxData; i++) {
+
             this.pointList.push(25 + audioData[i]);
         }
+
+        this.circleDivisions = (Math.PI * 2) / (this.pointList.length);
     }
 
     draw(ctx) {
@@ -64,32 +78,45 @@ export class LineVisualizer {
         Object.assign(this, { canvasWidth, canvasHeight, color, lineColor, lineWidth });
         this.pointList = [];
         this.height = canvasHeight / 2;
+        this.minData = 0;
+        this.maxData = 0;
         Object.seal(this);
+    }
+
+    setMinData(value) {
+        this.minData = value;
+    }
+
+    setMaxData(value) {
+        this.maxData = 256 - value;
+    }
+
+    setLineWidth(value) {
+        this.lineWidth = value;
     }
 
     update(audioData) {
         // Create a number of divisions along the width of the canvas
-        let width = this.canvasWidth / (audioData.length);
+        let width = this.canvasWidth / (audioData.length - this.maxData);
 
         // clear the point list
         this.pointList = [];
 
-        for (let i = 0; i <=audioData.length; i++) {
+        for (let i = this.minData; i <= audioData.length; i++) {
 
             // calculate the x & y of the given point
-            let finalX = i * width;
+            let finalX = (i - this.minData) * width;
             let finalY = this.height + 256 - audioData[i];
-            
+
             // clamp Y to Canvas Height is it goes over
             if (finalY >= this.canvasHeight) {
                 finalY = this.canvasHeight;
             }
-            
+
             // Put X & Y into an array
             let xy = [finalX, finalY];
 
-            if (i == audioData.length - 1)
-            {
+            if (i == audioData.length - 1) {
                 xy[0] = this.canvasWidth;
             }
 

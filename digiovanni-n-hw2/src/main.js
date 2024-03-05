@@ -2,7 +2,7 @@
 
 import * as utils from './utils.js';
 import * as audio from './audio.js';
-import * as canvas from './visualizer.js';
+import * as visualizer from './visualizer.js';
 import * as video from './video.js';
 
 const drawParams = {
@@ -43,6 +43,14 @@ const trackSelect = document.querySelector("#select-song");
 const fileSongInput = document.querySelector("#input-song");
 
 const checkboxFrequency = document.querySelector("#cb-frequency");
+
+const lineMinSlider = document.querySelector("#select-line-min");
+const lineMaxSlider = document.querySelector("#select-line-max");
+const lineWidthSlider = document.querySelector("#select-line-width");
+
+const circleMinSlider = document.querySelector("#select-circle-min");
+const circleMaxSlider = document.querySelector("#select-circle-max");
+const circleWidthSlider = document.querySelector("#select-circle-width");
 //#endregion
 
 
@@ -54,7 +62,7 @@ const init = () => {
     audio.setupWebaudio(DEFAULTS.sound1);
     let canvasElement = document.querySelector("canvas"); // hookup <canvas> element
     setupUI(canvasElement);
-    canvas.setupCanvas(canvasElement, audio.analyserNode);
+    visualizer.setupCanvas(canvasElement, audio.analyserNode);
     loop();
 
     video.setupVideoNode(canvasElement.height, canvasElement.width);
@@ -76,7 +84,7 @@ const loop = () => {
     /* NOTE: This is temporary testing code that we will delete in Part II */
     setTimeout(loop);
 
-    canvas.draw(drawParams);
+    visualizer.draw(drawParams);
 }
 
 // ----- | Setup Functions For Init To Organize It Better | -----
@@ -122,6 +130,24 @@ const setupButtons = () => {
 }
 
 const setupSliders = () => {
+    // ===== | Visualizer Sliders | =====
+    lineMinSlider.oninput = e => {
+        visualizer.lineVisualizer.setMinData(e.target.value);
+    }
+
+    lineMaxSlider.oninput = e => {
+        visualizer.lineVisualizer.setMaxData(e.target.value);
+    }
+
+    circleMinSlider.oninput = e => {
+        visualizer.circleVisualizer.setMinData(e.target.value);
+    }
+
+    circleMaxSlider.oninput = e => {
+        visualizer.circleVisualizer.setMaxData(e.target.value);
+    }
+
+    // ===== | Other Stuff | =====
     volumeSlider.oninput = e => {
         // Set the gain
         audio.setVolume(e.target.value);
@@ -149,7 +175,7 @@ function drawVideo() {
         return;
     }
 
-    document.querySelector("canvas").getContext("2d").drawImage(video.videoNode, 0, 0, canvas.width, canvas.height);
+    document.querySelector("canvas").getContext("2d").drawImage(video.videoNode, 0, 0, visualizer.width, visualizer.height);
     requestAnimationFrame(drawVideo);
 }
 

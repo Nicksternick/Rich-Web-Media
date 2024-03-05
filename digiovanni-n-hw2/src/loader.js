@@ -23,7 +23,7 @@ xhr.onload = (e) => {
     let options = songs.map(songData => (
         `<option value="${songData.link}">${songData.name}</option>`));
 
-    options[0] = `<option value="${songs[0].link} selected">${songs[0].name}</option>`;
+    options[0] = `<option value="${songs[0].link}" selected">${songs[0].name}</option>`;
 
     options.forEach(song => {
         document.querySelector("#select-song").innerHTML += song;

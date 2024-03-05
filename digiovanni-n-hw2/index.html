@@ -25,23 +25,16 @@
         </header>
 
         <section id="section-canvas">
-            <canvas width="640" height="360"></canvas>
+            <canvas width="854" height="480"></canvas>
         </section>
 
         <section id="section-controls">
-            <div>
-                <button id="btn-play">Play ></button>
-                <button id="btn-pause">Pause ||</button>
-                <span>
-                    00:00<input type="range" id="slider-play" min="0" max="300" value="0" step="1">
-                </span>
-            </div>
-            <div>
-                <span>
-                    Volume: <input type="range" id="slider-volume" min="0" max="2" value="1" step="0.01">
-                    <span id="label-volume">???</span>
-                </span>
-            </div>
+            <button id="btn-play">Play ></button>
+            <button id="btn-pause">Pause ||</button>
+            <span>
+                Volume: <input type="range" id="slider-volume" min="0" max="2" value="1" step="0.01">
+                <span id="label-volume">???</span>
+            </span>
         </section>
 
         <section id="section-settings">
@@ -52,7 +45,7 @@
                     <!-- Pre Installed Songs -->
                     <div>
                         <label for="">Select a Song:</label>
-                        <select name="" id="select-song">
+                        <select id="select-song">
                         </select>
                     </div>
 
@@ -70,12 +63,12 @@
                 <div>
                     <label>Highshelf Range: 0</label>
                     <div>
-                        <input type="range" id="slider-highshelf" min="0" max="10" value="0"> 
+                        <input type="range" id="slider-highshelf" min="0" max="10" value="0">
                     </div>
                     <br>
                     <label>Lowshelf Range: 0</label>
                     <div>
-                        <input type="range" id="slider-lowshelf" min="0" max="10" value="0"> 
+                        <input type="range" id="slider-lowshelf" min="0" max="10" value="0">
                     </div>
                     <br>
                     <div>
@@ -89,18 +82,77 @@
             <div>
                 <h2>Visualization Options</h2>
                 <div>
-                    <span>
-                        <input type="checkbox">
-                        <label>Test</label>
-                    </span>
-                    <span>
-                        <input type="checkbox">
-                        <label>Test</label>
-                    </span>
-                    <span>
-                        <input type="checkbox">
-                        <label>Test</label>
-                    </span>
+                    <div>
+                        <input type="checkbox" checked>
+                        <label>Circle</label>
+                    </div>
+                    <div>
+                        <input type="range" id="select-circle-min" min="0" max="256" value="0" step="1">
+                        <label for="">Min Analyzed Data: 0</label>
+                    </div>
+                    <div>
+                        <input type="range" id="select-circle-max" min="0" max="256" value="256" step="1">
+                        <label for="">Max Analyzed Data: 256</label>
+                    </div>
+                    <div>
+                        <input type="range" id="select-line-width" min="1" max="10" value="1" step="1">
+                        <label for="">Line Width: 1</label>
+                    </div>
+                    <div>
+                        <label for="">Color: </label>
+                        <select class="select-color">
+                            <option value="rgba(0,0,0,0)" selected>None</option>
+                            <option value="red">Red</option>
+                            <option value="blue">blue</option>
+                            <option value="yellow">yellow</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="">Line Color: </label>
+                        <select class="select-color">
+                            <option value="rgba(0,0,0,0)">None</option>
+                            <option value="red" selected>Red</option>
+                            <option value="blue">blue</option>
+                            <option value="yellow">yellow</option>
+                        </select>
+                    </div>
+                </div>
+                <hr>
+                <div>
+                    <div>
+                        <input type="checkbox" checked>
+                        <label>Line</label>
+                    </div>
+                    <div>
+                        <input type="range" id="select-line-min" min="0" max="256" value="0" step="1">
+                        <label for="">Min Analyzed Data: 0</label>
+                    </div>
+                    <div>
+                        <input type="range" id="select-line-max" min="0" max="256" value="256" step="1">
+                        <label for="">Max Analyzed Data: 256</label>
+                    </div>
+                    <div>
+                        <input type="range" id="select-line-width" min="1" max="10" value="1" step="1">
+                        <label for="">Line Width: 1</label>
+                    </div>
+                    <div>
+                        <label for="">Color: </label>
+                        <select class="select-color">
+                            <option value="rgba(0,0,0,0)" selected>None</option>
+                            <option value="red">Red</option>
+                            <option value="blue">blue</option>
+                            <option value="yellow">yellow</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="">Line Color: </label>
+                        <select class="select-color">
+                            <option value="rgba(0,0,0,0)">None</option>
+                            <option value="red" selected>Red</option>
+                            <option value="blue">blue</option>
+                            <option value="yellow">yellow</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </section>

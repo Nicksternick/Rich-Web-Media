@@ -16,8 +16,15 @@
     ],
     "visualizers": [
         {
-            "color": "white",
-            "lineColor": "white",
+            "name" : "circle",
+            "color": "none",
+            "lineColor": "red",
+            "lineWidth": 1
+        },
+        {
+            "name" : "line",
+            "color": "none",
+            "lineColor": "red",
             "lineWidth": 1
         }
     ]
