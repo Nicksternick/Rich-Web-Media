@@ -11,6 +11,14 @@ export class CircleVisualizer {
         Object.seal(this);
     }
 
+    setFillColor(value) {
+        this.color = value;
+    }
+
+    setLineColor(value) {
+        this.lineColor = value;
+    }
+
     setMinData(value) {
         this.minData = value;
     }
@@ -83,6 +91,14 @@ export class LineVisualizer {
         Object.seal(this);
     }
 
+    setFillColor(value) {
+        this.color = value;
+    }
+
+    setLineColor(value) {
+        this.lineColor = value;
+    }
+
     setMinData(value) {
         this.minData = value;
     }
@@ -142,6 +158,9 @@ export class LineVisualizer {
         for (let i = 1; i < this.pointList.length; i++) {
             ctx.lineTo(this.pointList[i][0], this.pointList[i][1]);
         }
+
+        ctx.lineTo(this.canvasWidth, this.canvasHeight);
+        ctx.lineTo(0, this.canvasHeight);
 
         // color the rect
         ctx.fill();

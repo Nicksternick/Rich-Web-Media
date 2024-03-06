@@ -47,10 +47,14 @@ const checkboxFrequency = document.querySelector("#cb-frequency");
 const lineMinSlider = document.querySelector("#select-line-min");
 const lineMaxSlider = document.querySelector("#select-line-max");
 const lineWidthSlider = document.querySelector("#select-line-width");
+const lineFillSelect = document.querySelector("#select-line-fill");
+const lineStrokeSelect = document.querySelector("#select-line-stroke");
 
 const circleMinSlider = document.querySelector("#select-circle-min");
 const circleMaxSlider = document.querySelector("#select-circle-max");
 const circleWidthSlider = document.querySelector("#select-circle-width");
+const circleFillSelect = document.querySelector("#select-circle-fill");
+const circleStrokeSelect = document.querySelector("#select-circle-stroke");
 //#endregion
 
 
@@ -74,6 +78,9 @@ const setupUI = (canvasElement) => {
 
     // set up the sliders
     setupSliders();
+
+    // set up selectors
+    setupSelect();
 
     checkboxFrequency.onclick = () => {
         drawParams.useFrequency = checkboxFrequency.checked;
@@ -129,6 +136,24 @@ const setupButtons = () => {
     }
 }
 
+const setupSelect = () => {
+    lineFillSelect.onchange = () => {
+        visualizer.lineVisualizer.setFillColor(lineFillSelect.value);
+    }
+
+    lineStrokeSelect.onchange = () => {
+        visualizer.lineVisualizer.setLineColor(lineStrokeSelect.value);
+    }
+
+    circleFillSelect.onchange = () => {
+        visualizer.circleVisualizer.setFillColor(circleFillSelect.value);
+    }
+
+    circleStrokeSelect.onchange = () => {
+        visualizer.circleVisualizer.setLineColor(circleStrokeSelect.value);
+    }
+}
+
 const setupSliders = () => {
     // ===== | Visualizer Sliders | =====
     lineMinSlider.oninput = e => {
@@ -139,12 +164,20 @@ const setupSliders = () => {
         visualizer.lineVisualizer.setMaxData(e.target.value);
     }
 
+    lineWidthSlider.oninput = e => {
+        visualizer.lineVisualizer.setLineWidth(e.target.value);
+    }
+
     circleMinSlider.oninput = e => {
         visualizer.circleVisualizer.setMinData(e.target.value);
     }
 
     circleMaxSlider.oninput = e => {
         visualizer.circleVisualizer.setMaxData(e.target.value);
+    }
+
+    circleWidthSlider.oninput = e => {
+        visualizer.circleVisualizer.setLineWidth(e.target.value);
     }
 
     // ===== | Other Stuff | =====
