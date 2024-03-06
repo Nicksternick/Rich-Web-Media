@@ -1,3 +1,43 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Honk&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Honk&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@500&display=swap');
+
+h1 {
+    font-family: "Honk", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+        "MORF" 15,
+        "SHLN" 50;
+    font-size: 50px;
+    margin: auto;
+    background-color: #93A8AC;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 5px solid black;
+}
+
+h2 {
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin: auto;
+    margin-bottom: 5px;
+}
+
+label,
+button,
+select {
+    font-family: "Noto Sans Display", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+}
+
 body {
     background-color: #424B54;
 }
@@ -8,32 +48,33 @@ canvas {
 
 hr {
     border: 1px solid black;
+
 }
 
 header {
     text-align: center;
-    background-color: #93A8AC;
-    /* font-size: 25px; */
+    margin: 5px;
+    display: flex;
 }
 
 button {
     border-radius: 8px;
     border: none;
     padding: 5px;
-    background-color: #F5CAC3;
+    background-color: #ebebeb;
     cursor: pointer;
 }
 
 select {
     border-radius: 8px;
     border: none;
-    background-color: #F5CAC3;
+    background-color: #ebebeb;
 }
 
 #section-main {
     display: grid;
     grid-area: "canvas"
-               "control";
+        "control";
 }
 
 #section-canvas {
@@ -45,7 +86,7 @@ select {
     justify-self: start;
     align-self: flex-start;
     padding: 5px;
-    background-color: rgba(147, 168, 172, 0.5);
+    background-color: rgba(147, 168, 172, 0.8);
     margin-top: 4px;
     margin-left: 4px;
     border: 1px solid black;

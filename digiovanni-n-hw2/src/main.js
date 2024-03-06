@@ -34,18 +34,24 @@ const filePlayButton = document.querySelector("#btn-file-play");
 const volumeSlider = document.querySelector("#slider-volume");
 const volumeLabel = document.querySelector("#label-volume");
 
+// High & Low Shelf Slider: Responsible for controlling the trebel and base node
 const highshelfSlider = document.querySelector("#slider-highshelf");
 const lowshelfSlider = document.querySelector("#slider-lowshelf");
 
+// Track Select: Responsible for holding the selected track
 const trackSelect = document.querySelector("#select-song");
 
+// file input: Responsible for holding the users inputed file
 const fileSongInput = document.querySelector("#input-song");
 
+// Frequency, Line, Circle, Gradient Checkbox: Resposible for
+// keeping track of what visualizers to draw
 const checkboxFrequency = document.querySelector("#cb-frequency");
 const checkboxLine = document.querySelector("#cb-line");
 const checkboxCircle = document.querySelector("#cb-circle");
 const checkboxGradient = document.querySelector("#cb-gradient");
 
+// THIS SECTION HOLDS ALL OF THE LINE MODIFIER CODE, AND THEIR LABELS
 const lineMinSlider = document.querySelector("#select-line-min");
 const lineMinLabel = document.querySelector("#label-line-min");
 
@@ -58,6 +64,9 @@ const lineWidthLabel = document.querySelector("#label-line-width");
 const lineFillSelect = document.querySelector("#select-line-fill");
 const lineStrokeSelect = document.querySelector("#select-line-stroke");
 
+// ====================================================================
+
+// THIS SECTION HOLDS ALL OF THE CIRCLE MODIFIER CODE, AND THEIR LABELS
 const circleMinSlider = document.querySelector("#select-circle-min");
 const circleMinLabel = document.querySelector("#label-circle-min");
 
@@ -69,19 +78,29 @@ const circleWidthLabel = document.querySelector("#label-circle-width");
 
 const circleFillSelect = document.querySelector("#select-circle-fill");
 const circleStrokeSelect = document.querySelector("#select-circle-stroke");
+// ====================================================================
 //#endregion
 
 
 // ===== | Methods | =====
 
 const init = (defaultFill, defaultStroke) => {
-    console.log("init called");
-    console.log(`Testing utils.getRandomColor() import: ${utils.getRandomColor()}`);
+    // Setup the audio node
     audio.setupWebaudio(DEFAULTS.sound1);
+
+    // get a reference to the canvas element
     let canvasElement = document.querySelector("canvas"); // hookup <canvas> element
+
+    // setup the UI
     setupUI();
+
+    // Set the audio file the currently selected track
+    audio.loadSoundFile(trackSelect.value);
     
+    // setup the canvas in the visualizer
     visualizer.setupCanvas(canvasElement, audio.analyserNode, defaultFill, defaultStroke);
+
+    // Begin the loop
     loop();
 }
 
@@ -104,12 +123,18 @@ const loop = () => {
     /* NOTE: This is temporary testing code that we will delete in Part II */
     setTimeout(loop);
 
+    // draw the visualizer
     visualizer.draw(drawParams);
 }
 
 // ----- | Setup Functions For Init To Organize It Better | -----
 
 const setupCheckboxes = () => {
+    
+    // FOR ALL OF THESE 4 EVENTS:
+    // Toggling them will set the related param boolean 
+    // to true or false depending on the checked attribute
+
     checkboxFrequency.onclick = () => {
         drawParams.useFrequency = checkboxFrequency.checked;
     }
@@ -148,22 +173,32 @@ const setupButtons = () => {
     }
 
     listPlayButton.onclick = e => {
+        // load in the audio
         audio.loadSoundFile(trackSelect.value);
+        // click the play button
         playButton.dispatchEvent(new MouseEvent("click"));
     }
 
     filePlayButton.onclick = e => {
+        // split by file by the ., to find the file extension
         let words = fileSongInput.value.split('.');
 
+        // If the last value in the array (The file extension) is an mp3
         if (words[words.length - 1] == "mp3") {
+            // Aquire that file
             const file = fileSongInput.files[0];
+            // load that file, making sure to turn it into a URL
             audio.loadSoundFile(URL.createObjectURL(file));
+            // click the play button
             playButton.dispatchEvent(new MouseEvent("click"));
         }
     }
 }
 
 const setupSelect = () => {
+    // ALL OF THESE EVENTS WORK THE SAME
+    // when the select value changes, set the fill or stroke appropitally based on the value
+
     lineFillSelect.onchange = () => {
         visualizer.lineVisualizer.setFillColor(lineFillSelect.value);
     }
@@ -182,7 +217,9 @@ const setupSelect = () => {
 }
 
 const setupSliders = () => {
-    // ===== | Visualizer Sliders | =====
+    // ALL OF THESE EVENTS WORK THE SAME
+    // When the range changes, set the new value based on the new range value
+
     lineMinSlider.oninput = e => {
         visualizer.lineVisualizer.setMinData(e.target.value);
         lineMinLabel.innerHTML = `Min Analyzed Data: ${e.target.value}`;
@@ -211,10 +248,9 @@ const setupSliders = () => {
 
     circleWidthSlider.oninput = e => {
         visualizer.circleVisualizer.setLineWidth(e.target.value);
-        circleWidthSlider.innerHTML = `Line Width: ${e.target.value}`;
+        circleWidthLabel.innerHTML = `Line Width: ${e.target.value}`;
     }
 
-    // ===== | Other Stuff | =====
     volumeSlider.oninput = e => {
         // Set the gain
         audio.setVolume(e.target.value);

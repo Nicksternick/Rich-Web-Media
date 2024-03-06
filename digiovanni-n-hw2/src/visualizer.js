@@ -13,7 +13,6 @@ let baseStroke;
 
 let gradientTimer = 0;
 
-let pause = false;
 // ===== | Methods | =====
 
 const setupCanvas = (canvasElement, analyserNodeRef, defaultFill, defaultStroke) => {
@@ -26,16 +25,16 @@ const setupCanvas = (canvasElement, analyserNodeRef, defaultFill, defaultStroke)
     // this is the array where the analyser data will be stored
     audioData = new Uint8Array(analyserNode.fftSize / 2);
 
-    console.log(defaultFill);
-    console.log(defaultStroke);
-
+    // set base fill and stroke to the defaults passed in
     basefill = defaultFill;
     baseStroke = defaultStroke;
 
+    // Set up the visualizers
     setupVisualizers();
 }
 
 const setupVisualizers = () => {
+    // Declare the two visualizer classes
     lineVisualizer = new visualizer.LineVisualizer(canvasWidth,
         canvasHeight, basefill, baseStroke, 1);
     circleVisualizer = new visualizer.CircleVisualizer(canvasWidth,
@@ -46,6 +45,7 @@ const draw = (params = {}) => {
     // 1 - populate the audioData array with the frequency data from the analyserNode
     // notice these arrays are passed "by reference" 
 
+    // Depending on the boolean, use Frequency or Wave data
     if (params.useFrequency) {
         analyserNode.getByteFrequencyData(audioData);
     }
@@ -65,22 +65,30 @@ const draw = (params = {}) => {
     // 3 - draw gradient
     if (params.showGradient) {
         // create a gradient that runs top to bottom
-        let step = 1
-        let gradientStop = 100 / step;
-        let stops = [];
+
+        // Initalize these variables
+        let step = 1 // how many gradient steps there will be
+        let gradientStop = 100 / step; // how many stops will be added to the array
+        let stops = []; // The gradient stop array
 
         for (let i = 0; i < gradientStop; i++) {
+            // Calculate percentage
             let percentage = (step * i) / 100;
+            //calculate the audio at the current percent
             let readAudio = audioData[Math.round((audioData.length - 1) * percentage)];
+            // create a hsl value
             let value = `hsl(${(readAudio + gradientTimer) % 360}, 30%, 70%)`;
-            console.log();
+            // push the new gradient stop
             stops.push({ percent: percentage, color: value });
         }
 
+        // Increment gradient timer (This is how I get the color wave effect)
         gradientTimer++;
 
+        //Set the gradient
         gradient = utils.getLinearGradient(ctx, 0, canvasHeight, 0, 0, stops);
 
+        // apply the gradient
         effectGradient();
     }
 

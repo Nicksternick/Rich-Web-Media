@@ -32,18 +32,22 @@ export class CircleVisualizer {
     }
 
     update(audioData) {
+        // Clear the points list
         this.pointList = [];
 
-        for (let i = this.minData; i <= audioData.length - this.maxData; i++) {
+        // each point in the point list represents a radius at each sub division
 
+        // This for loop is effected by the minData and maxData value
+        for (let i = this.minData; i <= audioData.length - this.maxData; i++) {
             this.pointList.push(25 + audioData[i]);
         }
 
+        // Calculate the number of subdivisions, equal to how many points were made
         this.circleDivisions = (Math.PI * 2) / (this.pointList.length);
     }
 
     draw(ctx) {
-        // get the middle of the school
+        // get the middle of the canvas
         let midX = this.canvasWidth / 2;
         let midY = this.canvasHeight / 3;
 
@@ -71,9 +75,10 @@ export class CircleVisualizer {
         // draw a final line to connect the start and end of the circle
         ctx.lineTo((Math.cos(0) * this.pointList[0] / 2) + midX, (Math.sin(0) * this.pointList[0] / 2) + midY);
 
-        // color the rect
+        // color the circle
         ctx.fill();
 
+        // line the circle
         ctx.stroke();
 
         ctx.closePath();
@@ -159,8 +164,10 @@ export class LineVisualizer {
             ctx.lineTo(this.pointList[i][0], this.pointList[i][1]);
         }
 
+        // Complete the box, so that the fill shows up correctly
         ctx.lineTo(this.canvasWidth, this.canvasHeight);
         ctx.lineTo(0, this.canvasHeight);
+        ctx.lineTo(this.pointList[0][0], this.pointList[0][1]);
 
         // color the rect
         ctx.fill();

@@ -2,12 +2,28 @@
     "name": "Audio Visualizer",
     "songs": [
         {
-            "name": "New Adventure Theme",
-            "link": "media/New Adventure Theme.mp3"
+            "name": "RUSH E",
+            "link": "media/Rush E.mp3"
         },
         {
-            "name": "Peanuts Theme",
-            "link": "media/Peanuts Theme.mp3"
+            "name": "Payday",
+            "link": "media/Payday.mp3"
+        },
+        {
+            "name": "Lord of the Rangs!",
+            "link": "media/Lord of the Rangs!.mp3"
+        },
+        {
+            "name": "Blue Skies",
+            "link": "media/Blue Skies.mp3"
+        },
+        {
+            "name": "Hyperfun",
+            "link": "media/Hyperfun.mp3"
+        },
+        {
+            "name": "New Adventure Theme",
+            "link": "media/New Adventure Theme.mp3"
         },
         {
             "name": "The Picard Song",
@@ -21,33 +37,33 @@
         },
         {
             "name" : "Red",
-            "color": "red"
+            "color": "rgba(255,0,0,.2)"
         },
         {
             "name" : "Blue",
-            "color": "blue"
+            "color": "rgba(0,0,255,.2)"
         },
         {
             "name" : "Yellow",
-            "color": "yellow"
+            "color": "rgba(255,127,0,.2)"
         },
         {
             "name" : "Purple",
-            "color": "purple"
+            "color": "rgba(127,0,255,.2)"
         },
         {
             "name" : "Green",
-            "color": "green"
+            "color": "rgba(128,255,0,.2)"
         },
         {
             "name" : "Orange",
-            "color": "orange"
+            "color": "rgba(255,153,0,.2)"
         },
         {
             "name" : "White",
-            "color": "white"
+            "color": "rgba(255,255,255,.2)"
         }
     ],
-    "defaultFill" : "rgba(0,0,0,0)",
-    "defaultStroke" : "red"
+    "defaultFill" : "rgba(255,0,0,.2)",
+    "defaultStroke" : "rgba(255,0,0,.2)"
 }
