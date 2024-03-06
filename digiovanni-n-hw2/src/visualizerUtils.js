@@ -45,7 +45,7 @@ export class CircleVisualizer {
     draw(ctx) {
         // get the middle of the school
         let midX = this.canvasWidth / 2;
-        let midY = this.canvasHeight / 2;
+        let midY = this.canvasHeight / 3;
 
         // save the current context
         ctx.save();

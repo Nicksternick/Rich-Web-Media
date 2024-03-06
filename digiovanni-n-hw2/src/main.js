@@ -3,7 +3,6 @@
 import * as utils from './utils.js';
 import * as audio from './audio.js';
 import * as visualizer from './visualizer.js';
-import * as video from './video.js';
 
 const drawParams = {
     showGradient: true,
@@ -43,16 +42,31 @@ const trackSelect = document.querySelector("#select-song");
 const fileSongInput = document.querySelector("#input-song");
 
 const checkboxFrequency = document.querySelector("#cb-frequency");
+const checkboxLine = document.querySelector("#cb-line");
+const checkboxCircle = document.querySelector("#cb-circle");
+const checkboxGradient = document.querySelector("#cb-gradient");
 
 const lineMinSlider = document.querySelector("#select-line-min");
+const lineMinLabel = document.querySelector("#label-line-min");
+
 const lineMaxSlider = document.querySelector("#select-line-max");
+const lineMaxLabel = document.querySelector("#label-line-max");
+
 const lineWidthSlider = document.querySelector("#select-line-width");
+const lineWidthLabel = document.querySelector("#label-line-width");
+
 const lineFillSelect = document.querySelector("#select-line-fill");
 const lineStrokeSelect = document.querySelector("#select-line-stroke");
 
 const circleMinSlider = document.querySelector("#select-circle-min");
+const circleMinLabel = document.querySelector("#label-circle-min");
+
 const circleMaxSlider = document.querySelector("#select-circle-max");
+const circleMaxLabel = document.querySelector("#label-circle-max");
+
 const circleWidthSlider = document.querySelector("#select-circle-width");
+const circleWidthLabel = document.querySelector("#label-circle-width");
+
 const circleFillSelect = document.querySelector("#select-circle-fill");
 const circleStrokeSelect = document.querySelector("#select-circle-stroke");
 //#endregion
@@ -60,19 +74,18 @@ const circleStrokeSelect = document.querySelector("#select-circle-stroke");
 
 // ===== | Methods | =====
 
-const init = () => {
+const init = (defaultFill, defaultStroke) => {
     console.log("init called");
     console.log(`Testing utils.getRandomColor() import: ${utils.getRandomColor()}`);
     audio.setupWebaudio(DEFAULTS.sound1);
     let canvasElement = document.querySelector("canvas"); // hookup <canvas> element
-    setupUI(canvasElement);
-    visualizer.setupCanvas(canvasElement, audio.analyserNode);
+    setupUI();
+    
+    visualizer.setupCanvas(canvasElement, audio.analyserNode, defaultFill, defaultStroke);
     loop();
-
-    video.setupVideoNode(canvasElement.height, canvasElement.width);
 }
 
-const setupUI = (canvasElement) => {
+const setupUI = () => {
     // set up the buttons
     setupButtons();
 
@@ -82,9 +95,9 @@ const setupUI = (canvasElement) => {
     // set up selectors
     setupSelect();
 
-    checkboxFrequency.onclick = () => {
-        drawParams.useFrequency = checkboxFrequency.checked;
-    }
+    // set up checkboxes
+    setupCheckboxes();
+    
 } // end setupUI
 
 const loop = () => {
@@ -95,6 +108,24 @@ const loop = () => {
 }
 
 // ----- | Setup Functions For Init To Organize It Better | -----
+
+const setupCheckboxes = () => {
+    checkboxFrequency.onclick = () => {
+        drawParams.useFrequency = checkboxFrequency.checked;
+    }
+
+    checkboxLine.onclick = () => {
+        drawParams.showBars = checkboxLine.checked;
+    }
+
+    checkboxCircle.onclick = () => {
+        drawParams.showCircle = checkboxCircle.checked;
+    }
+
+    checkboxGradient.onclick = () => {
+        drawParams.showGradient = checkboxGradient.checked;
+    }
+}
 
 const setupButtons = () => {
     // Get references to the buttons, then setup their on click event
@@ -129,10 +160,6 @@ const setupButtons = () => {
             audio.loadSoundFile(URL.createObjectURL(file));
             playButton.dispatchEvent(new MouseEvent("click"));
         }
-        else if (words[words.length - 1] == "mp4") {
-            video.playVideo();
-            drawVideo();
-        }
     }
 }
 
@@ -158,26 +185,33 @@ const setupSliders = () => {
     // ===== | Visualizer Sliders | =====
     lineMinSlider.oninput = e => {
         visualizer.lineVisualizer.setMinData(e.target.value);
+        lineMinLabel.innerHTML = `Min Analyzed Data: ${e.target.value}`;
+        
     }
 
     lineMaxSlider.oninput = e => {
         visualizer.lineVisualizer.setMaxData(e.target.value);
+        lineMaxLabel.innerHTML = `Max Analyzed Data: ${e.target.value}`;
     }
 
     lineWidthSlider.oninput = e => {
         visualizer.lineVisualizer.setLineWidth(e.target.value);
+        lineWidthLabel.innerHTML = `Line Width: ${e.target.value}`;
     }
 
     circleMinSlider.oninput = e => {
         visualizer.circleVisualizer.setMinData(e.target.value);
+        circleMinLabel.innerHTML = `Min Analyzed Data: ${e.target.value}`;
     }
 
     circleMaxSlider.oninput = e => {
         visualizer.circleVisualizer.setMaxData(e.target.value);
+        circleMaxLabel.innerHTML = `Max Analyzed Data: ${e.target.value}`;
     }
 
     circleWidthSlider.oninput = e => {
         visualizer.circleVisualizer.setLineWidth(e.target.value);
+        circleWidthSlider.innerHTML = `Line Width: ${e.target.value}`;
     }
 
     // ===== | Other Stuff | =====
@@ -192,8 +226,6 @@ const setupSliders = () => {
     // set value of label to match inital value of slider
     volumeSlider.dispatchEvent(new Event("input"));
 
-    audio.setVolume(.01);
-
     highshelfSlider.oninput = e => {
         audio.setHighshelf(e.target.value);
     }
@@ -201,15 +233,6 @@ const setupSliders = () => {
     lowshelfSlider.oninput = e => {
         audio.setLowshelf(e.target.value);
     }
-}
-
-function drawVideo() {
-    if (video.videoNode.paused || video.videoNode.ended) {
-        return;
-    }
-
-    document.querySelector("canvas").getContext("2d").drawImage(video.videoNode, 0, 0, visualizer.width, visualizer.height);
-    requestAnimationFrame(drawVideo);
 }
 
 export { init };

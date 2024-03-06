@@ -14,18 +14,40 @@
             "link": "media/The Picard Song.mp3"
         }
     ],
-    "visualizers": [
+    "colors": [
         {
-            "name" : "circle",
-            "color": "none",
-            "lineColor": "red",
-            "lineWidth": 1
+            "name" : "None",
+            "color": "rgba(0,0,0,0)"
         },
         {
-            "name" : "line",
-            "color": "none",
-            "lineColor": "red",
-            "lineWidth": 1
+            "name" : "Red",
+            "color": "red"
+        },
+        {
+            "name" : "Blue",
+            "color": "blue"
+        },
+        {
+            "name" : "Yellow",
+            "color": "yellow"
+        },
+        {
+            "name" : "Purple",
+            "color": "purple"
+        },
+        {
+            "name" : "Green",
+            "color": "green"
+        },
+        {
+            "name" : "Orange",
+            "color": "orange"
+        },
+        {
+            "name" : "White",
+            "color": "white"
         }
-    ]
+    ],
+    "defaultFill" : "rgba(0,0,0,0)",
+    "defaultStroke" : "red"
 }

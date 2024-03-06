@@ -6,6 +6,9 @@ let appName;
 let songs;
 let visualizers;
 
+let defaultFill;
+let defaultStroke;
+
 const url = "data/av-data.json";
 const xhr = new XMLHttpRequest();
 xhr.onload = (e) => {
@@ -15,7 +18,10 @@ xhr.onload = (e) => {
 
     const appName = json.name;
     const songs = json.songs;
-    const visualizers = json.visualizers;
+    const colors = json.colors;
+
+    defaultFill = json.defaultFill;
+    defaultStroke = json.defaultStroke;
 
     document.querySelector("title").innerHTML = appName;
     document.querySelector("header h1").innerHTML = appName;
@@ -28,10 +34,33 @@ xhr.onload = (e) => {
     options.forEach(song => {
         document.querySelector("#select-song").innerHTML += song;
     });
+
+    let colorOptions = "";
+
+    for (let color of colors)
+    {
+        if (color.color != defaultStroke)
+        {
+            colorOptions += `<option value="${color.color}">${color.name}</option>`;
+        }
+        else
+        {
+            colorOptions += `<option value="${color.color}" selected>${color.name}</option>`;
+        }
+    }
+
+    const colorSelectors = document.querySelectorAll(".colors");
+
+    for (let selectors of colorSelectors)
+    {
+        selectors.innerHTML = colorOptions;
+    }
+    
+    // 2 - start up app
+    main.init(defaultFill, defaultStroke);
 };
 xhr.onerror = e => console.log(`In onerror - HTTP Status Code = ${e.target.status}`);
 xhr.open("GET", url);
 xhr.send();
 
-// 2 - start up app
-main.init();
+
