@@ -5,7 +5,6 @@
 
 h1 {
     font-family: "Honk", system-ui;
-    font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
     font-variation-settings:
@@ -31,7 +30,6 @@ label,
 button,
 select {
     font-family: "Noto Sans Display", sans-serif;
-    font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
     font-variation-settings:
@@ -73,8 +71,6 @@ select {
 
 #section-main {
     display: grid;
-    grid-area: "canvas"
-        "control";
 }
 
 #section-canvas {
