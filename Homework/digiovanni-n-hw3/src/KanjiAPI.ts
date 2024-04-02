@@ -52,7 +52,7 @@ export const loadNewKanji = (kanji: string, divContainer: string) => {
     // fetch the json, and continue if it succeeds
     fetchJson(url).then((response) => {
         // Get the container for the kanji
-        let container:HTMLDivElement = document.querySelector(divContainer) as HTMLDivElement;
+        let container = document.querySelector(divContainer) as HTMLDivElement;
 
         // Set the current kanji to the newly aquired one
         currentKanji = response;
