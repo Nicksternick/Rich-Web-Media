@@ -1,4 +1,5 @@
 // ===== | Imports | =====
+import { fetchJson } from "./WebHandler.js"
 
 // ===== | Interfaces | =====
 
@@ -28,6 +29,12 @@ let currentKanji:KanjiObject;
 let kanjiLibrary:kanjiLibrary
 
 // ===== | Methods | =====
+export const fetch = () => {
+    fetchJson("https://kanjiapi.dev/v1/kanji/金").then((response) => {
+        currentKanji = response;
+        console.log(currentKanji.kun_readings);
+    });
+}
 
 /** initalizes the KanjiAPI, getting the kanji from local storage */
 const initKanjiAPI = () => 
