@@ -4,6 +4,14 @@ import * as kanjiApi from "./kanjiAPI.ts"
 // ===== | Functions | =====
 
 const init = () => {
+    // Setup the UI
+    initUI();
+
+    // Call init function
+    kanjiApi.initKanjiAPI();
+}
+
+const initUI = () => {
     const kanjiInput = document.querySelector("#input-kanji") as HTMLInputElement;
     const kanjiGetButton = document.querySelector("#btn-get-kanji") as HTMLButtonElement;
     const kanjiRandomButton = document.querySelector("#btn-random-kanji") as HTMLButtonElement;
@@ -38,9 +46,6 @@ const init = () => {
     kanjiListSelect.addEventListener('change', () => {
         kanjiApi.updateKanjiList(kanjiListSelect.value);
     });
-
-    // Call init function
-    kanjiApi.initKanjiAPI();
 }
 
 // ===== | Call Init | =====

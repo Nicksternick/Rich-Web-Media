@@ -6,13 +6,42 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Re: Kanji Finder</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="./src/bulma.ts"></script>
 </head>
 
 <body>
     <header>
-        <h1>Re: Kanji Finder</h1>
+        <nav class="navbar has-shadow is-danger">
+            <!-- Logo | Brand -->
+            <div class="navbar-brand">
+                <a class="navbar-item" href="about.html">
+                    <img src="./media/kanji.png" alt="logo">
+                </a>
+                <a class="navbar-burger" id="burger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
+            </div>
+    
+            <!-- Menu -->
+            <div class="navbar-menu" id="nav-links">
+                <div class="navbar-start">
+                    <a class="navbar-item" href="about.html">
+                        About
+                    </a>
+    
+                    <a class="navbar-item" href="app.html">
+                        App
+                    </a>
+                </div> <!-- end navbar-start -->
+            </div>
+        </nav>
     </header>
+
+    <h1>Re: Kanji Finder</h1>   
 
     <!-- Kanji Selection Area -->
     <div>
@@ -57,6 +86,9 @@
 
         </div>
     </div>
+
+    <h2>Sources</h2>
+    <a href="https://www.flaticon.com/free-icons/kanji" title="kanji icons">Home icon created by Paul J. - Flaticon</a>
 </body>
 
 </html>
