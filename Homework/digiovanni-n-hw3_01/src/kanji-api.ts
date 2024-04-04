@@ -1,5 +1,5 @@
 // ===== | Imports | =====
-import { fetchJson } from "./webHandler.ts"
+import { fetchJson } from "./web-handler.ts"
 import { randomInt } from "./utils.ts"
 
 // ===== | Interfaces | =====
@@ -55,6 +55,8 @@ export const initKanjiAPI = () => {
     if (storage) {
         // Parse this information into the kanji library
         kanjiLibrary = JSON.parse(storage)
+
+        updateLibrary();
     }
 
     // ----- | Initialize the kanjiList to be a list of all the kanji | -----
@@ -84,10 +86,8 @@ export const saveKanji = () => {
         kanjiLibrary[currentKanji.kanji] = currentKanji.kanji;
         updateLibrary();
         console.log(`Library Updated Successfully! ${kanjiLibrary[currentKanji.kanji]}`);
-    }
-    else
-    {
-        console.log(`That kanji was already added!`);
+
+        localStorage.setItem(libraryKey, JSON.stringify(kanjiLibrary));
     }
 }
 
@@ -101,6 +101,8 @@ export const removeKanji = () => {
         chosenKanjiContainer.dataset.value = "";
         chosenKanjiContainer.innerHTML = "";
         updateLibrary();
+
+        localStorage.setItem(libraryKey, JSON.stringify(kanjiLibrary));
     }
 }
 
@@ -114,11 +116,11 @@ export const searchKanji = () => {
 }
 
 const updateLibrary = () => {
-    let newElement: string = `<ul>`;
+    let newElement: string = "";
 
     for (let kanji in kanjiLibrary)
     {
-        newElement += `<div class='library-item'>${kanji}</div>`;
+        newElement += `<div class='library-item box'>${kanji}</div>`;
     }
 
     libraryContainer.innerHTML = newElement;
@@ -149,13 +151,14 @@ export const loadNewKanji = (kanji: string) => {
         currentKanji = response;
 
         // Prepare the information variables 
+        let kanji:string = `<span>${currentKanji.kanji}</span>`;
         let stroke:string = `Stroke Count: ${currentKanji.stroke_count}`;
-        let grade:string = "Grade: "
-        let jlpt:string = "JLPT: "
-        let kunReadings:string = "Kun Readings: "
-        let onReadings:string = "On Readings: "
-        let nameReadings:string = "Name Readings: "
-        let meanings:string = "Meanings: "
+        let grade:string = "Grade: ";
+        let jlpt:string = "JLPT: ";
+        let kunReadings:string = "Kun Readings: ";
+        let onReadings:string = "On Readings: ";
+        let nameReadings:string = "Name Readings: ";
+        let meanings:string = "Meanings: ";
         
         // ----- | Check to make sure properties aren't null or empty | -----
         grade += currentKanji.grade != null? currentKanji.grade.toString() : "None";
@@ -200,7 +203,6 @@ export const loadNewKanji = (kanji: string) => {
 
         // Create a new unordered list and fill it with the contents
         let newElement: string = `<ul>`;
-        newElement += `<li>${currentKanji.kanji}</li>`;
         newElement += `<li>${stroke}</li>`;
         newElement += `<li>${grade}</li>`;
         newElement += `<li>${jlpt}</li>`;
@@ -211,7 +213,7 @@ export const loadNewKanji = (kanji: string) => {
         newElement += `</ul>`;
 
         // Set the containers contents equal to the new elements
-        kanjiContainer.innerHTML = newElement;
+        kanjiContainer.innerHTML = kanji + newElement;
     });
 }
 

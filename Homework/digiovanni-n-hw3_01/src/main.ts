@@ -1,5 +1,6 @@
 // ===== | Imports | =====
-import * as kanjiApi from "./kanjiAPI.ts"
+import * as kanjiApi from "./kanji-api.ts";
+import "./bulma.ts";
 
 // ===== | Functions | =====
 
