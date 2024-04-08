@@ -120,7 +120,7 @@ const updateLibrary = () => {
 
     for (let kanji in kanjiLibrary)
     {
-        newElement += `<div class='library-item box'>${kanji}</div>`;
+        newElement += `<div class='library-item p-2'>${kanji}</div>`;
     }
 
     libraryContainer.innerHTML = newElement;

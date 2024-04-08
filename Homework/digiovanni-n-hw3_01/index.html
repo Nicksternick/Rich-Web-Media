@@ -43,46 +43,51 @@
 
     <h1>Re: Kanji Finder</h1>
 
-    <!-- Kanji Selection Area -->
-    <div>
-        <label for="kanji-select">Select a list to get a random kanji from</label>
-        <select name="kanji-select" id="select-list-kanji">
-            <option selected value="kanji/all">All</option>
-            <option value="kanji/joyo">Joyo</option>
-            <option value="kanji/jinmeiyo">Jinmeiyo</option>
-            <option value="kanji/kyouiku">Kyouiku</option>
-            <option value="kanji/grade-1">Grade 1</option>
-            <option value="kanji/grade-2">Grade 2</option>
-            <option value="kanji/grade-3">Grade 3</option>
-            <option value="kanji/grade-4">Grade 4</option>
-            <option value="kanji/grade-5">Grade 5</option>
-            <option value="kanji/grade-6">Grade 6</option>
-            <option value="kanji/grade-7">Grade 7</option>
-            <option value="kanji/grade-8">Grade 8</option>
-        </select>
-    </div>
-    <div>
-        <button id="btn-random-kanji">Get Random Kanji</button>
-        <button id="btn-save-kanji">Save Kanji To Library</button>
-    </div>
-    <div>
-        <input id="input-kanji" type="text">
-        <button id="btn-get-kanji">Get Kanji</button>
-    </div>
+
 
     <hr>
 
-    <!-- Kanji Info Display Area -->
-    <div class="container">
-        <div id="container" class="box"></div>
+
+    <div class="container columns">
+        <div class="column">
+            <!-- Kanji Selection Area -->
+            <div>
+                <label for="kanji-select">Select a list to get a random kanji from</label>
+                <select class="select" name="kanji-select" id="select-list-kanji">
+                    <option selected value="kanji/all">All</option>
+                    <option value="kanji/joyo">Joyo</option>
+                    <option value="kanji/jinmeiyo">Jinmeiyo</option>
+                    <option value="kanji/kyouiku">Kyouiku</option>
+                    <option value="kanji/grade-1">Grade 1</option>
+                    <option value="kanji/grade-2">Grade 2</option>
+                    <option value="kanji/grade-3">Grade 3</option>
+                    <option value="kanji/grade-4">Grade 4</option>
+                    <option value="kanji/grade-5">Grade 5</option>
+                    <option value="kanji/grade-6">Grade 6</option>
+                    <option value="kanji/grade-7">Grade 7</option>
+                    <option value="kanji/grade-8">Grade 8</option>
+                </select>
+            </div>
+            <div class="buttons">
+                <button class="button is-responsive" id="btn-get-kanji">Search Kanji</button>
+                <button class="button is-responsive" id="btn-random-kanji">Random Kanji</button>
+                <button class="button is-responsive" id="btn-save-kanji">Save Kanji</button>
+            </div>
+            <div>
+                <input class="input is-small" id="input-kanji" type="text">
+            </div>
+        </div>
+
+        <!-- Kanji Info Display Area -->
+        <div id="container" class="column"></div>
     </div>
-    
+
     <hr>
 
     <!-- Holding the library information -->
     <div class="container">
-        <button id="btn-search-kanji">Search</button>
-        <button id="btn-remove-kanji">Remove</button>
+        <button class="button is-rounded" id="btn-search-kanji">Search</button>
+        <button class="button is-rounded" id="btn-remove-kanji">Remove</button>
         <span id="chosen-kanji" data-value=""></span>
     </div>
 
@@ -93,11 +98,11 @@
         </div>
     </div>
 
-        <hr>
+    <hr>
 
-        <h2>Sources</h2>
-        <a href="https://www.flaticon.com/free-icons/kanji" title="kanji icons">Home icon created by Paul J. -
-            Flaticon</a>
+    <h2>Sources</h2>
+    <a href="https://www.flaticon.com/free-icons/kanji" title="kanji icons">Home icon created by Paul J. -
+        Flaticon</a>
 </body>
 
 </html>
