@@ -120,7 +120,7 @@ const updateLibrary = () => {
 
     for (let kanji in kanjiLibrary)
     {
-        newElement += `<div class='library-item p-2'>${kanji}</div>`;
+        newElement += `<div class='library-item is-clickable is-size-1 p-2'>${kanji}</div>`;
     }
 
     libraryContainer.innerHTML = newElement;
@@ -151,7 +151,7 @@ export const loadNewKanji = (kanji: string) => {
         currentKanji = response;
 
         // Prepare the information variables 
-        let kanji:string = `<span>${currentKanji.kanji}</span>`;
+        let kanji:string = `<p class="is-size-1">${currentKanji.kanji}</p>`;
         let stroke:string = `Stroke Count: ${currentKanji.stroke_count}`;
         let grade:string = "Grade: ";
         let jlpt:string = "JLPT: ";
@@ -202,7 +202,7 @@ export const loadNewKanji = (kanji: string) => {
         }
 
         // Create a new unordered list and fill it with the contents
-        let newElement: string = `<ul>`;
+        let newElement: string = `<ul class="">`;
         newElement += `<li>${stroke}</li>`;
         newElement += `<li>${grade}</li>`;
         newElement += `<li>${jlpt}</li>`;
@@ -212,8 +212,18 @@ export const loadNewKanji = (kanji: string) => {
         newElement += `<li>${meanings}</li>`;
         newElement += `</ul>`;
 
+        // let newElement: string = `<p>`;
+        // newElement += `${stroke}`;
+        // newElement += `${grade}`;
+        // newElement += `${jlpt}`;
+        // newElement += `${kunReadings}`;
+        // newElement += `${onReadings}`;
+        // newElement += `${nameReadings}`;
+        // newElement += `${meanings}`;
+        // newElement += `</p>`;
+
         // Set the containers contents equal to the new elements
-        kanjiContainer.innerHTML = kanji + newElement;
+        kanjiContainer.innerHTML = `${kanji + newElement}`;
     });
 }
 
