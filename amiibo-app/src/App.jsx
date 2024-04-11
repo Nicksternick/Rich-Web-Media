@@ -1,42 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './App.css'
+import { loadXHR } from "./ajax";
+import { readFromLocalStorage, writeToLocalStorage } from "./storage";
+import Footer from "./Footer";
 
 // app "globals" and utils
 const baseurl = "https://www.amiiboapi.com/api/amiibo/?name=";
-
-const loadXHR = (url, callback) => {
-    // set up the connection
-    // when the data loads, invoke the callback function and pass it the `xhr` object
-    const xhr = new XMLHttpRequest();
-
-    xhr.onload = () => callback(xhr);
-
-    xhr.open("GET", url);
-
-    xhr.send();
-};
 
 const searchAmiibo = (name, callback) => {
     loadXHR(`${baseurl}${name}`, callback);
 };
 
 const App = () => {
-    const [term, setTerm] = useState("peach");
+    const savedTerm = readFromLocalStorage("term") || "";
+    const [term, setTerm] = useState(savedTerm);
     const [results, setResults] = useState([]);
+
+    useEffect(() => {
+        writeToLocalStorage("term", term);
+    });
 
     const parseAmiiboResult = xhr => {
         // get the `.responseText` string
         const string = xhr.responseText;
-    
+
         // declare a json variable
         let json;
-    
+
         // try to parse the string into a json object
         json = JSON.parse(string)
-    
+
         // log out number of results (length of `json.amiibo`)
         console.log(`Number of results=${json.amiibo.length}`);
-    
+
         // loop through `json.amiibo` and log out the character name
         for (let name of json.amiibo) {
             console.log(name.character);
@@ -68,9 +64,10 @@ const App = () => {
             </span>
         ))}
         <hr />
-        <footer>
-            <p>&copy; 2023 Ace Coder</p>
-        </footer>
+        <Footer
+            name="Nicholas DiGiovanni"
+            year={new Date().getFullYear()}
+        />
     </>;
 };
 

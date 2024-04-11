@@ -131,8 +131,8 @@ const updateLibrary = () => {
         kanji.addEventListener('click', () => {
             chosenKanjiContainer.dataset.value = kanji.innerHTML;
             chosenKanjiContainer.innerHTML = `${kanji.innerHTML} is selected.`;
-        })
-    })
+        });
+    });
 }
 
 // ----- | Load Kanji Functions | -----
