@@ -4,6 +4,7 @@ import "./bulma.ts";
 
 // ===== | Functions | =====
 
+/** Initalizes the app */
 const init = () => {
     // Setup the UI
     initUI();
@@ -13,6 +14,7 @@ const init = () => {
 }
 
 const initUI = () => {
+    // Get refrences to all of the inputs in the app
     const kanjiInput = document.querySelector("#input-kanji") as HTMLInputElement;
     const kanjiGetButton = document.querySelector("#btn-get-kanji") as HTMLButtonElement;
     const kanjiRandomButton = document.querySelector("#btn-random-kanji") as HTMLButtonElement;

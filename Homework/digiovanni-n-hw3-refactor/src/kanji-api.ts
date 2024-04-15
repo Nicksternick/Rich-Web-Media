@@ -60,74 +60,107 @@ export const initKanjiAPI = () => {
     }
 
     // ----- | Initialize the kanjiList to be a list of all the kanji | -----
+    // Get the list of every possible kanji
     let url: string = KanjiAPI_URL + `kanji/all`;
 
+    // Fetch the first random kanji when the page loads
     fetchJson(url).then((response) => {
+        // set the kanji list to the response
         kanjiList = response;
 
+        // load a random kanji
         loadRandomKanji();
     });
 }
 
+/** Updates the list that the random kanji is picked from */
 export const updateKanjiList = (newlist:string) => {
+    // create the new url
     let url: string = KanjiAPI_URL + newlist;
 
+    // try to fetch the new list
     fetchJson(url).then((response) => {
+        // set the new list if successful
         kanjiList = response;
-        
     }).catch(() => {
+        // throw a console log if it fails
         console.log("Error Updating List, Make Sure Values Are Correct");
     });
 }
 
+/** save the current kanji to the kanji library */
 export const saveKanji = () => {
+    // If the current kanji isn't already in the library
     if (kanjiLibrary[currentKanji.kanji] == null)
     {
+        // Add the current kanji as a new entry
         kanjiLibrary[currentKanji.kanji] = currentKanji.kanji;
+        
+        // update the library to make it visible to the user
         updateLibrary();
-        console.log(`Library Updated Successfully! ${kanjiLibrary[currentKanji.kanji]}`);
 
+        // Update the local storage
         localStorage.setItem(libraryKey, JSON.stringify(kanjiLibrary));
     }
 }
 
+/** removes the selected kanji from the library */
 export const removeKanji = () => {
+    // Get the key from the value of from the chosen kanji container
     let index: string | undefined = chosenKanjiContainer.dataset.value;
     
+    // if the key is not undefined
     if (index)
     {
+        // delete that entry from the library
         delete kanjiLibrary[index];
 
+        // reset the chosen kanji container
         chosenKanjiContainer.dataset.value = "";
         chosenKanjiContainer.innerHTML = "";
+
+        // update the library to make it visible to the user
         updateLibrary();
 
+        // Update the local storage
         localStorage.setItem(libraryKey, JSON.stringify(kanjiLibrary));
     }
 }
 
+/** search the selected kanji from the library */
 export const searchKanji = () => {
+    // Get the kanji from the value of from the chosen kanji container
     let kanji: string | undefined = chosenKanjiContainer.dataset.value;
     
+    // If the kanji is not undefined
     if (kanji)
     {
+        // load that kanji
         loadNewKanji(kanji)
     }
 }
 
+/** updates the kanji library UI */
 const updateLibrary = () => {
+    // clear the library
     let newElement: string = "";
 
+    // For every kanji entry
     for (let kanji in kanjiLibrary)
     {
+        // Add them to the library
         newElement += `<div class='library-item is-clickable is-size-1 p-2'>${kanji}</div>`;
     }
 
+    // Put it in the container on the page
     libraryContainer.innerHTML = newElement;
 
+    // Get all the library items
     let libraryItems = document.querySelectorAll('.library-item') as NodeListOf<HTMLDivElement>;
 
+    // For each item
     libraryItems.forEach((kanji) => {
+        // Add a new event to update the chosen kanji when a new kanji is clicked
         kanji.addEventListener('click', () => {
             chosenKanjiContainer.dataset.value = kanji.innerHTML;
             chosenKanjiContainer.innerHTML = `${kanji.innerHTML} is selected.`;
@@ -160,11 +193,13 @@ export const loadNewKanji = (kanji: string) => {
         let nameReadings:string = "Name Readings: ";
         let meanings:string = "Meanings: ";
         
-        // ----- | Check to make sure properties aren't null or empty | -----
+        // Set the grade of the kanji
         grade += currentKanji.grade != null? currentKanji.grade.toString() : "None";
 
+        // Set the jlpt level of the kanji
         jlpt += currentKanji.jlpt != null? currentKanji.jlpt.toString() : "None";
 
+        // Set the kun readings (array) of the kanji
         if (currentKanji.kun_readings.length != 0)
         {
             kunReadings += currentKanji.kun_readings.join(', ');
@@ -174,6 +209,7 @@ export const loadNewKanji = (kanji: string) => {
             kunReadings += "None"
         }
 
+        // Set the on readings (array) of the kanji
         if (currentKanji.on_readings.length != 0)
         {
             onReadings += currentKanji.on_readings.join(', ');
@@ -183,6 +219,7 @@ export const loadNewKanji = (kanji: string) => {
             onReadings += "None"
         }
 
+        // Set the name readings (array) of the kanji
         if (currentKanji.name_readings.length != 0)
         {
             nameReadings += currentKanji.name_readings.join(', ');
@@ -192,6 +229,7 @@ export const loadNewKanji = (kanji: string) => {
             nameReadings += "None"
         }
 
+        // Set the meanings (array) of the kanji
         if (currentKanji.meanings.length != 0)
         {
             meanings += currentKanji.meanings.join(', ');
@@ -212,21 +250,12 @@ export const loadNewKanji = (kanji: string) => {
         newElement += `<li>${meanings}</li>`;
         newElement += `</ul>`;
 
-        // let newElement: string = `<p>`;
-        // newElement += `${stroke}`;
-        // newElement += `${grade}`;
-        // newElement += `${jlpt}`;
-        // newElement += `${kunReadings}`;
-        // newElement += `${onReadings}`;
-        // newElement += `${nameReadings}`;
-        // newElement += `${meanings}`;
-        // newElement += `</p>`;
-
         // Set the containers contents equal to the new elements
         kanjiContainer.innerHTML = `${kanji + newElement}`;
     });
 }
 
+/**Load a random kanji */
 export const loadRandomKanji = () => {
     // Get a random number
     let index: number = randomInt(0, kanjiList.length - 1);
