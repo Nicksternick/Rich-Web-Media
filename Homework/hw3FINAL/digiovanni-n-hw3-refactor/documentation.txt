@@ -1,0 +1,20 @@
+I decided to code in Typescript
+
+With how abhorrent my intro to web dev project was
+I decided that it would be best if I just recoded
+The project from the ground up, using the previous
+project as a reference.
+
+The main script is kanji-api.ts, which holds all of the
+code that uses the api information to format it on the screen.
+It also holds two interfaces. One to hold kanji that the user
+decides to save to local storage, and another that holds all of
+the details of the current kanji.There are two external files 
+that act as supporting files to the kanji-api.ts. First one is 
+a utils.ts file. For now it only has one function. But I plan
+to add more pure functions to the module in the furue. The second
+supporting file is the web-handler.ts. This handles the fetch requests
+that the kanji-api.ts file does.
+
+For bundling, I was initially going to use vite, but I couldn't get
+building to work properly, so I switched over to webpacks partway through

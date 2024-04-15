@@ -12,12 +12,18 @@ const renderer = new THREE.WebGLRenderer();
 // Set it's size
 renderer.setSize(window.innerWidth, window.innerHeight);
 
-// Append the renderer to the document
-document.body.appendChild(renderer.domElement);
-
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshBasicMaterial({color: 0x00ff00});
 const cube = new THREE.Mesh(geometry, material)
 scene.add(cube);
 
 camera.position.z = 5;
+
+// Append the renderer to the document
+document.body.appendChild(renderer.domElement);
+
+function animate() {
+	requestAnimationFrame( animate );
+	renderer.render( scene, camera );
+}
+animate();
