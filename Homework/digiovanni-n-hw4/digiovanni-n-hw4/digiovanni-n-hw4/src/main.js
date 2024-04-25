@@ -59,6 +59,7 @@ const getFeatureById = (id) => {
 const showFeatureDetails = (id) => {
 	const feature = getFeatureById(id);
 
+<<<<<<< HEAD
     // Create the buttons
     let btnFavorite = document.createElement('button');
     let btnDelete = document.createElement('button');
@@ -93,6 +94,18 @@ const showFeatureDetails = (id) => {
 		<p><b>Website: </b><a href="${feature.properties.url}">${feature.properties.url}</a></p>`;
     document.querySelector("#details-2").appendChild(container);
 	document.querySelector("#details-3").innerHTML = feature.properties.description;
+=======
+	const details1 = document.querySelector("#details-1");
+	const details2 = document.querySelector("#details-2");
+	const details3 = document.querySelector("#details-3");
+
+	details1.innerHTML = `Info for ${feature.properties.title}`;
+	details2.innerHTML = 
+		`<p><b>Address: </b>${feature.properties.address}</p>
+		<p><b>Phone: </b><a href="tel:${feature.properties.phone}">${feature.properties.phone}</a></p>
+		<p><b>Website: </b><a href="${feature.properties.url}">${feature.properties.url}</a></p>`;
+		details3.innerHTML = feature.properties.description;
+>>>>>>> 081d139f0d506225b79c376dbb88c16d40a119e2
 };
 
 const refreshFavorites = () => {
