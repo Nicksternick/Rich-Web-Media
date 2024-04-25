@@ -13,6 +13,19 @@
 	cursor: pointer;
 }
 
+#details-3 p{
+	margin-bottom: 1em !important;
+}
+
+#favorites-list{
+	height: 144px;
+	overflow: auto;
+}
+
+button {
+    margin: 3px;
+}
+
 .mapboxgl-popup {
 	max-width: 200px;
 }

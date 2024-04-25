@@ -58,11 +58,40 @@ const getFeatureById = (id) => {
 
 const showFeatureDetails = (id) => {
 	const feature = getFeatureById(id);
+
+    // Create the buttons
+    let btnFavorite = document.createElement('button');
+    let btnDelete = document.createElement('button');
+
+    // Set up the favorites and delete buttons classes
+    btnFavorite.classList.add("button");
+    btnFavorite.classList.add("has-background-primary");
+    btnFavorite.innerHTML = "Favorite";
+    btnDelete.classList.add("button");
+    btnDelete.classList.add("has-background-warning");
+    btnDelete.innerHTML = "Delete";
+
+    // Depending on whether the location is
+    // favorited disable one of the buttons
+    if (favoriteIds.includes(id))
+    {
+        btnFavorite.disabled = true;
+    }
+    else
+    {
+        btnDelete.disabled = true;
+    }
+    
+    let container = document.createElement('p');
+    container.appendChild(btnFavorite)
+    container.appendChild(btnDelete);
+
 	document.querySelector("#details-1").innerHTML = `Info for ${feature.properties.title}`;
 	document.querySelector("#details-2").innerHTML = 
 		`<p><b>Address: </b>${feature.properties.address}</p>
 		<p><b>Phone: </b><a href="tel:${feature.properties.phone}">${feature.properties.phone}</a></p>
 		<p><b>Website: </b><a href="${feature.properties.url}">${feature.properties.url}</a></p>`;
+    document.querySelector("#details-2").appendChild(container);
 	document.querySelector("#details-3").innerHTML = feature.properties.description;
 };
 
