@@ -58,12 +58,17 @@ const getFeatureById = (id) => {
 
 const showFeatureDetails = (id) => {
 	const feature = getFeatureById(id);
-	document.querySelector("#details-1").innerHTML = `Info for ${feature.properties.title}`;
-	document.querySelector("#details-2").innerHTML = 
+
+	const details1 = document.querySelector("#details-1");
+	const details2 = document.querySelector("#details-2");
+	const details3 = document.querySelector("#details-3");
+
+	details1.innerHTML = `Info for ${feature.properties.title}`;
+	details2.innerHTML = 
 		`<p><b>Address: </b>${feature.properties.address}</p>
 		<p><b>Phone: </b><a href="tel:${feature.properties.phone}">${feature.properties.phone}</a></p>
 		<p><b>Website: </b><a href="${feature.properties.url}">${feature.properties.url}</a></p>`;
-	document.querySelector("#details-3").innerHTML = feature.properties.description;
+		details3.innerHTML = feature.properties.description;
 };
 
 const refreshFavorites = () => {
