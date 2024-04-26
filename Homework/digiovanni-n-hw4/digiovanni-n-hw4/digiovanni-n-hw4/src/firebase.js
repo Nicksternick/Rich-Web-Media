@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
 // https://firebase.google.com/docs/web/setup#available-libraries
-import { getDatabase, ref, set, push, onValue, increment } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+import { getDatabase, ref, set, push, onValue, increment } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -19,11 +19,19 @@ const db = getDatabase();
 
 const likedParksPath = "df-liked-parks/";
 
-const pushLikedParkToCloud = park => {
+const incrementParkLike = park => {
+    console.log(park);
     park.likes = increment(1);
     const favRef = ref(db, `${likedParksPath}${park.hash}`);
     set(favRef, park); // `dog` is an object with `.title`, `.url`, `.likes` properties etc
 };
 
+const decrementParkLike = park => {
+    console.log(park);
+    park.likes = increment(-1);
+    const favRef = ref(db, `${likedParksPath}${park.hash}`);
+    set(favRef, park); // `dog` is an object with `.title`, `.url`, `.likes` properties etc
+};
+
 // You might get awway with exporting fewer functions than this
-export { db, likedParksPath, pushLikedParkToCloud, ref, set, push, onValue };
+export { db, likedParksPath, incrementParkLike, decrementParkLike, ref, set, push, onValue };
