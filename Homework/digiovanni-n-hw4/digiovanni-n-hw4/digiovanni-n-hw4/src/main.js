@@ -141,7 +141,7 @@ const favoritePlace = (id) => {
         refreshFavorites();
         showFeatureDetails(id);
         storage.writeToLocalStorage(key, favoriteIds);
-        firebase.incrementParkLike(id);
+        firebase.editParkLike(id, 1);
     }
 }
 
@@ -151,7 +151,7 @@ const deletePlace = (id) => {
         refreshFavorites();
         showFeatureDetails(id);
         storage.writeToLocalStorage(key, favoriteIds);
-        firebase.decrementParkLike(id);
+        firebase.editParkLike(id, -1);
     }
 }
 
