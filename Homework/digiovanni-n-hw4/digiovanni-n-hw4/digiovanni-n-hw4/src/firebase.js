@@ -30,6 +30,7 @@ const editParkLike = (park, amount) => {
             console.log("found - current values=", favorite);
             const likes = favorite.likes + amount;
 
+            console.log(favorite.likes);
             console.log(amount);
 
             const newData = {

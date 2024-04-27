@@ -23,9 +23,18 @@ const init = () => {
 
 const favoritesChanged = (snapshot) => {
     const list = document.querySelector("#favorite-list");
+    let listItems = ""
     snapshot.forEach(fav => {
         const childKey = fav.key;
         const childData = fav.val();
-        console.log(childKey, childData);
+        console.log(childData);
+        listItems += "<li>";
+        listItems += `<span class="has-text-weight-bold">${parks[childKey]} (${childKey})</span>`;
+        listItems += `<span> - Likes: ${childData.likes}</span>`;
+        listItems += `</li>`;
     });
+
+    list.innerHTML = listItems;
 };
+
+init()
